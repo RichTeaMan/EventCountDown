@@ -24,6 +24,7 @@ namespace EventCountdown
     /// </summary>
     public sealed partial class MainPage : Page
     {
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -50,6 +51,7 @@ namespace EventCountdown
 
             cntBlock.Text = string.Format("{0} days till Christmas!", days);
             cntBlock.TextWrapping = TextWrapping.WrapWholeWords;
+
 
             
         }

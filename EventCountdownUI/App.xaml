@@ -2,7 +2,6 @@
 
     <!--Application Resources-->
     <Application.Resources>
-        <ai:TelemetryClient x:Key="ApplicationInsightsBootstrapper" xmlns:ai="clr-namespace:Microsoft.ApplicationInsights;assembly=Microsoft.ApplicationInsights"/>
         <local:LocalizedStrings xmlns:local="clr-namespace:EventCountdownUI" x:Key="LocalizedStrings"/>
     </Application.Resources>
 

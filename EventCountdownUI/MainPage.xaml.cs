@@ -41,7 +41,9 @@ namespace EventCountdownUI
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            BuildCountdowns();
+            // Only build countdowns if this page is new.
+            if (e.NavigationMode == NavigationMode.New)
+                BuildCountdowns();
         }
 
         private void BuildCountdowns()

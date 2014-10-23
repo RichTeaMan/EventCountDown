@@ -17,7 +17,7 @@ namespace EventCountdownUI
     public partial class CountdownSummary : UserControl
     {
         const int MIN_SECONDS_TO_CHANGE = 3;
-        const int MAX_SECONDS_TO_CHANGE = 10;
+        const int MAX_SECONDS_TO_CHANGE = 8;
 
         DispatcherTimer Timer;
 
@@ -148,7 +148,9 @@ namespace EventCountdownUI
                     .AddParameter(StringParam.COUNT, countStr)
                     .AddParameter(StringParam.EVENT_NAME, Countdown.Title);
                 
-                SummaryText.Text = sc.BuildString(AppResources.GeneralCountdown);
+                var summary = sc.BuildString(AppResources.GeneralCountdown);
+                Dispatcher.BeginInvoke(() => SummaryText.Text = summary);
+
             }
             else
             {

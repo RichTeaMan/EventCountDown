@@ -134,13 +134,49 @@
   <data name="AppBarMenuItemText" xml:space="preserve">
     <value>Menu Item</value>
   </data>
-  <data name="DayCountdown" xml:space="preserve">
-    <value>DAY_COUNT days till EVENT_NAME!</value>
+  <data name="GeneralCountdown" xml:space="preserve">
+    <value>COUNT INTERVAL_NAME till EVENT_NAME!</value>
   </data>
   <data name="NoCountdown" xml:space="preserve">
     <value>No countdown set.</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Events</value>
+  </data>
+  <data name="DayName" xml:space="preserve">
+    <value>day</value>
+  </data>
+  <data name="DayPluralName" xml:space="preserve">
+    <value>days</value>
+  </data>
+  <data name="HourName" xml:space="preserve">
+    <value>hour</value>
+  </data>
+  <data name="HourPluralName" xml:space="preserve">
+    <value>hours</value>
+  </data>
+  <data name="MinuteName" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="MinutePluralName" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="SecondName" xml:space="preserve">
+    <value>second</value>
+  </data>
+  <data name="SecondPluralName" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="WeekName" xml:space="preserve">
+    <value>week</value>
+  </data>
+  <data name="WeekPluralName" xml:space="preserve">
+    <value>weeks</value>
+  </data>
+  <data name="YearName" xml:space="preserve">
+    <value>year</value>
+  </data>
+  <data name="YearPluralName" xml:space="preserve">
+    <value>years</value>
   </data>
 </root>

@@ -110,6 +110,7 @@
     </Compile>
     <Compile Include="StringCreator.cs" />
     <Compile Include="TileFactory.cs" />
+    <Compile Include="Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

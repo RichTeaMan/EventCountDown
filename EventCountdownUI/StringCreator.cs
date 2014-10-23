@@ -54,6 +54,7 @@ namespace EventCountdownUI
         DAY_NAME,
         EVENT_NAME,
         DAY_COUNT,
-        
+        COUNT,
+        INTERVAL_NAME
     }
 }

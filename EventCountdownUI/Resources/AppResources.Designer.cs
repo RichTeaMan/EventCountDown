@@ -88,11 +88,65 @@ namespace EventCountdownUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DAY_COUNT days till EVENT_NAME!.
+        ///   Looks up a localized string similar to day.
         /// </summary>
-        public static string DayCountdown {
+        public static string DayName {
             get {
-                return ResourceManager.GetString("DayCountdown", resourceCulture);
+                return ResourceManager.GetString("DayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to days.
+        /// </summary>
+        public static string DayPluralName {
+            get {
+                return ResourceManager.GetString("DayPluralName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to COUNT INTERVAL_NAME till EVENT_NAME!.
+        /// </summary>
+        public static string GeneralCountdown {
+            get {
+                return ResourceManager.GetString("GeneralCountdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hour.
+        /// </summary>
+        public static string HourName {
+            get {
+                return ResourceManager.GetString("HourName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to hours.
+        /// </summary>
+        public static string HourPluralName {
+            get {
+                return ResourceManager.GetString("HourPluralName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minutes.
+        /// </summary>
+        public static string MinuteName {
+            get {
+                return ResourceManager.GetString("MinuteName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to minutes.
+        /// </summary>
+        public static string MinutePluralName {
+            get {
+                return ResourceManager.GetString("MinutePluralName", resourceCulture);
             }
         }
         
@@ -129,6 +183,60 @@ namespace EventCountdownUI.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to second.
+        /// </summary>
+        public static string SecondName {
+            get {
+                return ResourceManager.GetString("SecondName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to seconds.
+        /// </summary>
+        public static string SecondPluralName {
+            get {
+                return ResourceManager.GetString("SecondPluralName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to week.
+        /// </summary>
+        public static string WeekName {
+            get {
+                return ResourceManager.GetString("WeekName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to weeks.
+        /// </summary>
+        public static string WeekPluralName {
+            get {
+                return ResourceManager.GetString("WeekPluralName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to year.
+        /// </summary>
+        public static string YearName {
+            get {
+                return ResourceManager.GetString("YearName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to years.
+        /// </summary>
+        public static string YearPluralName {
+            get {
+                return ResourceManager.GetString("YearPluralName", resourceCulture);
             }
         }
     }

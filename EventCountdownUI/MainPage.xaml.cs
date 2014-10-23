@@ -51,12 +51,17 @@ namespace EventCountdownUI
         private void BuildCountdowns()
         {
             var countdowns = Countdown.GetCountdowns();
+            int rowCount = 0;
             foreach (var c in countdowns)
             {
                 var summary = new CountdownSummary(c) {
                     Background = ContentPanel.Background
                 };
+                var row = new RowDefinition(){ Height = new GridLength(summary.Height + 2)};
+                ContentPanel.RowDefinitions.Add(row);
+                summary.SetValue(Grid.RowProperty, rowCount);
                 ContentPanel.Children.Add(summary);
+                rowCount++;
             }
         }
 

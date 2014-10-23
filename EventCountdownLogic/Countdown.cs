@@ -43,6 +43,19 @@ namespace EventCountdownLogic
             return date;            
         }
 
+        public static Countdown Halloween
+        {
+            get
+            {
+                var halloween = new Countdown()
+                {
+                    Title = "Halloween",
+                    TargetDate = GetDateTime(31, 10)
+                };
+                return halloween;
+            }
+        }
+
         public static Countdown Christmas
         {
             get
@@ -54,12 +67,28 @@ namespace EventCountdownLogic
                 };
                 return xmas;
             }
+        }
 
+        public static Countdown NewYearsEve
+        {
+            get
+            {
+                var newYear = new Countdown()
+                {
+                    Title = "New Years Eve",
+                    TargetDate = GetDateTime(31, 12)
+                };
+                return newYear;
+            }
         }
 
         public static IList<Countdown> GetCountdowns()
         {
-            return new[] { Christmas };
+            return new[] { 
+                Halloween,
+                Christmas,
+                NewYearsEve
+            };
         }
     }
 }

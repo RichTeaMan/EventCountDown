@@ -22,11 +22,51 @@ namespace EventCountdownLogic
             return GetTimeSpanFromDate(DateTime.Now);
         }
 
+        public int GetSeconds
+        {
+            get
+            {
+                return (int)Math.Ceiling(GetTimeSpan().TotalSeconds);
+            }
+        }
+
+        public int GetMinutes
+        {
+            get
+            {
+                return (int)Math.Ceiling(GetTimeSpan().TotalMinutes);
+            }
+        }
+
+        public int GetHours
+        {
+            get
+            {
+                return (int)Math.Ceiling(GetTimeSpan().TotalHours);
+            }
+        }
+
         public int GetDays
         {
             get
             {
                 return (int)Math.Ceiling(GetTimeSpan().TotalDays);
+            }
+        }
+
+        public double GetWeeks
+        {
+            get
+            {
+                return GetDays / 7.0;
+            }
+        }
+
+        public double GetYears
+        {
+            get
+            {
+                return GetDays / 365.0;
             }
         }
 

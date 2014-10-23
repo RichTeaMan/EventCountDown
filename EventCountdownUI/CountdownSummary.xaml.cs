@@ -39,14 +39,19 @@ namespace EventCountdownUI
         }
 
         public CountdownSummary()
+            : this(null)
+        { }
+
+        public CountdownSummary(Countdown countdown)
         {
+            Countdown = countdown;
             InitializeComponent();
+            SetText();
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(1);
             Timer.Tick += Timer_Tick;
             Timer.Start();
             SummaryText.TextWrapping = TextWrapping.Wrap;
-            SetText();
         }
 
         private void Timer_Tick(object sender, EventArgs e)

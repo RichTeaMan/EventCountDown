@@ -7,6 +7,9 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using EventCountdownUI.Resources;
+using Windows.Storage;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace EventCountdownUI
 {
@@ -105,6 +108,14 @@ namespace EventCountdownUI
                 // An unhandled exception has occurred; break into the debugger
                 Debugger.Break();
             }
+            WriteDataToFileAsync("Log.txt", e.ToString());
+        }
+
+        public async Task WriteDataToFileAsync(string fileName, string content)
+        {
+            var folder = ApplicationData.Current.LocalFolder;
+            var file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+            await FileIO.AppendTextAsync(file, content);
         }
 
         #region Phone application initialization

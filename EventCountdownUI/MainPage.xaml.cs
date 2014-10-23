@@ -10,6 +10,7 @@ using Microsoft.Phone.Shell;
 using EventCountdownUI.Resources;
 using EventCountdownLogic;
 using Microsoft.Phone.Scheduler;
+using System.Reflection;
 
 namespace EventCountdownUI
 {
@@ -24,9 +25,20 @@ namespace EventCountdownUI
         public MainPage()
         {
             InitializeComponent();
-            
+            Version.Text = GetVersion();
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
+        }
+
+        public static string GetVersion()
+        {
+            var versionAttribute = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyFileVersionAttribute), true).FirstOrDefault() as AssemblyFileVersionAttribute;
+
+            if (versionAttribute != null)
+            {
+                return versionAttribute.Version;
+            }
+            return "";
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -41,8 +53,7 @@ namespace EventCountdownUI
             var countdowns = Countdown.GetCountdowns();
             foreach (var c in countdowns)
             {
-                var summary = new CountdownSummary() {
-                    Countdown = c,
+                var summary = new CountdownSummary(c) {
                     Background = ContentPanel.Background
                 };
                 ContentPanel.Children.Add(summary);

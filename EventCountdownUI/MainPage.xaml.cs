@@ -16,7 +16,7 @@ namespace EventCountdownUI
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        
+        private bool builtCountdowns = false;
 
         // Constructor
         public MainPage()
@@ -41,13 +41,15 @@ namespace EventCountdownUI
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            // Only build countdowns if this page is new.
-            if (e.NavigationMode == NavigationMode.New)
-                BuildCountdowns();
+            BuildCountdowns();
         }
 
         private void BuildCountdowns()
         {
+            // Only build countdowns if this page is new.
+            if (builtCountdowns)
+                return;
+
             var countdowns = Countdown.GetCountdowns();
             int rowCount = 0;
             foreach (var c in countdowns)
@@ -61,6 +63,7 @@ namespace EventCountdownUI
                 ContentPanel.Children.Add(summary);
                 rowCount++;
             }
+            builtCountdowns = true;
         }
 
         // Sample code for building a localized ApplicationBar

@@ -46,7 +46,7 @@ namespace EventCountdownUI
             {
                 var summary = new TextBlock()
                 {
-                    Text = date.ToShortDateString(),
+                    Text = date.DateTime.ToShortDateString(),
                     Height = 22
                 };
                 var row = new RowDefinition() { Height = new GridLength(summary.Height + 2) };

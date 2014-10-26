@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="AnnualCountdown.cs" />
     <Compile Include="Countdown.cs" />
+    <Compile Include="CountdownDateTime.cs" />
     <Compile Include="MonthlyCountdown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,83 +6,37 @@ using System.Threading.Tasks;
 
 namespace EventCountdownLogic
 {
-    public class Countdown
+    public abstract class Countdown
     {
         public string Id { get; private set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public virtual DateTime TargetDate { get; protected set; }
 
         protected Countdown()
         {
             Id = Guid.NewGuid().ToString();
         }
 
-        public Countdown(DateTime targetDate) : this()
+        protected CountdownDateTime GetCountdownDateTime(DateTime datetime)
         {
-            TargetDate = targetDate;
+            var cdt = new CountdownDateTime(this, datetime);
+            return cdt;
         }
 
-        public virtual IEnumerable<DateTime> GetFutureDates()
+        protected CountdownDateTime GetCountdownDateTime(int year, int month, int day)
         {
-            yield return TargetDate;
+            var datetime = new DateTime(year, month, day);
+            var cdt = GetCountdownDateTime(datetime);
+            return cdt;
         }
 
-        public TimeSpan GetTimeSpanFromDate(DateTime date)
-        {
-            return TargetDate - date;
-        }
+        public abstract IEnumerable<CountdownDateTime> GetFutureDates();
 
-        public TimeSpan GetTimeSpan()
-        {
-            return GetTimeSpanFromDate(DateTime.Now);
-        }
-
-        public int GetSeconds
+        public CountdownDateTime NextDate
         {
             get
             {
-                return (int)Math.Ceiling(GetTimeSpan().TotalSeconds);
-            }
-        }
-
-        public int GetMinutes
-        {
-            get
-            {
-                return (int)Math.Ceiling(GetTimeSpan().TotalMinutes);
-            }
-        }
-
-        public int GetHours
-        {
-            get
-            {
-                return (int)Math.Ceiling(GetTimeSpan().TotalHours);
-            }
-        }
-
-        public int GetDays
-        {
-            get
-            {
-                return (int)Math.Ceiling(GetTimeSpan().TotalDays);
-            }
-        }
-
-        public double GetWeeks
-        {
-            get
-            {
-                return GetDays / 7.0;
-            }
-        }
-
-        public double GetYears
-        {
-            get
-            {
-                return GetDays / 365.0;
+                return GetFutureDates().First();
             }
         }
 

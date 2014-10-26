@@ -20,7 +20,7 @@ namespace EventCountdownScheduledTaskAgent
                 WideContent1 = "Event Countdown",
                 WideContent2 = string.Empty,
                 WideContent3 = string.Empty,
-                Count = xmasCountdown.GetDays,
+                Count = xmasCountdown.NextDate.GetDays,
                 IconImage = null,
                 SmallIconImage = null
 

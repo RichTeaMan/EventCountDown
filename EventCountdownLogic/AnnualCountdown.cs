@@ -23,12 +23,12 @@ namespace EventCountdownLogic
             Title = title;
             Day = day;
             Month = month;
-            TargetDate = GetAnnualDateTime(day, month);
         }
 
-        public override IEnumerable<DateTime> GetFutureDates()
+
+        public override IEnumerable<CountdownDateTime> GetFutureDates()
         {
-            var current = TargetDate;
+            var current = GetCountdownDateTime(GetAnnualDateTime(Day, Month));
             yield return current;
             while (true)
             {
@@ -39,7 +39,7 @@ namespace EventCountdownLogic
                     nextDay = maxDays;
                 else
                     nextDay = Day;
-                current = new DateTime(nextYear, Month, nextDay);
+                current = GetCountdownDateTime(nextYear, Month, nextDay);
                 yield return current;
             }
         }

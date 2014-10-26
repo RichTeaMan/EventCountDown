@@ -19,7 +19,7 @@ namespace EventCountdownUI
 
             var xmasCountdown = EventCountdownLogic.Countdown.Christmas;
             var tileText = tileXml.GetElementsByTagName("text");
-            (tileText[0] as XmlElement).InnerText = xmasCountdown.GetDays.ToString();
+            (tileText[0] as XmlElement).InnerText = xmasCountdown.NextDate.GetDays.ToString();
 
             (tileText[1] as XmlElement).InnerText = "Days to Christmas";
             //(tileText[2] as XmlElement).InnerText = "Row 2";

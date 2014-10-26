@@ -18,12 +18,11 @@ namespace EventCountdownLogic
                 throw new ArgumentException("Invalid day.");
             Title = title;
             Day = day;
-            TargetDate = GetMonthlyDateTime(Day);
         }
 
-        public override IEnumerable<DateTime> GetFutureDates()
+        public override IEnumerable<CountdownDateTime> GetFutureDates()
         {
-            var current = TargetDate;
+            var current = GetCountdownDateTime(GetMonthlyDateTime(Day));
             yield return current;
             while (true)
             {
@@ -40,7 +39,7 @@ namespace EventCountdownLogic
                     nextDay = maxDays;
                 else
                     nextDay = Day;
-                current = new DateTime(nextYear, nextMonth, nextDay);
+                current = GetCountdownDateTime(nextYear, nextMonth, nextDay);
                 yield return current;
             }
         }

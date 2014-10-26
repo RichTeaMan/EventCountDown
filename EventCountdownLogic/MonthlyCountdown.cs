@@ -27,17 +27,20 @@ namespace EventCountdownLogic
             yield return current;
             while (true)
             {
-                int nextYear = current.Year + 1;
+                int nextYear = current.Year;
                 int nextMonth = current.Month + 1;
-                if (nextMonth >= 13)
+                if (nextMonth > 12)
+                {
                     nextMonth = 1;
+                    nextYear++;
+                }
                 var maxDays = DateTime.DaysInMonth(nextYear, nextMonth);
                 int nextDay;
                 if (Day > maxDays)
                     nextDay = maxDays;
                 else
                     nextDay = Day;
-                current = new DateTime(nextDay, nextMonth, nextYear);
+                current = new DateTime(nextYear, nextMonth, nextDay);
                 yield return current;
             }
         }

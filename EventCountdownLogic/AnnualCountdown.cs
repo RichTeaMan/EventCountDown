@@ -39,7 +39,7 @@ namespace EventCountdownLogic
                     nextDay = maxDays;
                 else
                     nextDay = Day;
-                current = new DateTime(nextDay, Month, nextYear);
+                current = new DateTime(nextYear, Month, nextDay);
                 yield return current;
             }
         }

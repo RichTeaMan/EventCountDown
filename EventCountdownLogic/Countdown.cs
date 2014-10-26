@@ -8,13 +8,17 @@ namespace EventCountdownLogic
 {
     public class Countdown
     {
+        public string Id { get; private set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public virtual DateTime TargetDate { get; protected set; }
 
-        protected Countdown() { }
+        protected Countdown()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
 
-        public Countdown(DateTime targetDate)
+        public Countdown(DateTime targetDate) : this()
         {
             TargetDate = targetDate;
         }
@@ -119,14 +123,19 @@ namespace EventCountdownLogic
             }
         }
 
+        private static IList<Countdown> _countdowns = null;
         public static IList<Countdown> GetCountdowns()
         {
-            return new[] { 
-                Halloween,
-                Christmas,
-                NewYearsEve,
-                PayDay
-            };
+            if (_countdowns == null)
+            {
+                _countdowns = new[] {
+                    Halloween,
+                    Christmas,
+                    NewYearsEve,
+                    PayDay
+                };
+            }
+            return _countdowns;
         }
     }
 }

@@ -44,13 +44,19 @@ namespace EventCountdownUI
             BuildCountdowns();
         }
 
+        private void NavigateToCountdownPage(Countdown countdown)
+        {
+            NavigationService.Navigate(new Uri("/CountdownPage.xaml?cd=" + countdown.Id, UriKind.Relative));
+        }
+
+
         private void BuildCountdowns()
         {
             // Only build countdowns if this page is new.
             if (builtCountdowns)
                 return;
 
-            var countdowns = Countdown.GetCountdowns();
+            var countdowns = Countdown.GetCountdowns().OrderBy(cd => cd.GetSeconds);
             int rowCount = 0;
             foreach (var c in countdowns)
             {
@@ -62,8 +68,20 @@ namespace EventCountdownUI
                 summary.SetValue(Grid.RowProperty, rowCount);
                 ContentPanel.Children.Add(summary);
                 rowCount++;
+
+                summary.Tap += Summary_Tap;
             }
             builtCountdowns = true;
+        }
+
+        private void Summary_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var summary = sender as CountdownSummary;
+            if (summary == null)
+                return;
+
+            e.Handled = true;
+            NavigateToCountdownPage(summary.Countdown);
         }
 
         // Sample code for building a localized ApplicationBar

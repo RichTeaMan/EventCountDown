@@ -10,7 +10,19 @@ namespace EventCountdownLogic
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime TargetDate { get; set; }
+        public virtual DateTime TargetDate { get; protected set; }
+
+        protected Countdown() { }
+
+        public Countdown(DateTime targetDate)
+        {
+            TargetDate = targetDate;
+        }
+
+        public virtual IEnumerable<DateTime> GetFutureDates()
+        {
+            yield return TargetDate;
+        }
 
         public TimeSpan GetTimeSpanFromDate(DateTime date)
         {
@@ -70,28 +82,21 @@ namespace EventCountdownLogic
             }
         }
 
-        public static DateTime GetDateTime(int day, int month)
+        public static Countdown PayDay
         {
-            var year = DateTime.Now.Year;
-            
-            var date = new DateTime(year, month, day);
-            var timeRemaining = date - DateTime.Now;
-            if (timeRemaining.Ticks < 0)
+            get
             {
-                date = new DateTime(year + 1, month, day);
+                var payday = new MonthlyCountdown("Payday", 28);
+                return payday;
             }
-            return date;            
         }
+
 
         public static Countdown Halloween
         {
             get
             {
-                var halloween = new Countdown()
-                {
-                    Title = "Halloween",
-                    TargetDate = GetDateTime(31, 10)
-                };
+                var halloween = new AnnualCountdown("Halloween", 31, 10);
                 return halloween;
             }
         }
@@ -100,11 +105,7 @@ namespace EventCountdownLogic
         {
             get
             {
-                var xmas = new Countdown()
-                {
-                    Title = "Christmas",
-                    TargetDate = GetDateTime(25, 12)
-                };
+                var xmas = new AnnualCountdown("Christmas", 25, 12);
                 return xmas;
             }
         }
@@ -113,11 +114,7 @@ namespace EventCountdownLogic
         {
             get
             {
-                var newYear = new Countdown()
-                {
-                    Title = "New Years Eve",
-                    TargetDate = GetDateTime(31, 12)
-                };
+                var newYear = new AnnualCountdown("New Years Eve", 31, 12);
                 return newYear;
             }
         }
@@ -127,7 +124,8 @@ namespace EventCountdownLogic
             return new[] { 
                 Halloween,
                 Christmas,
-                NewYearsEve
+                NewYearsEve,
+                PayDay
             };
         }
     }

@@ -12,9 +12,37 @@ namespace EventCountdownLogic
         public string Title { get; set; }
         public string Description { get; set; }
 
+        public TimeSpan Duration { get; set; }
+
         protected Countdown()
         {
             Id = Guid.NewGuid().ToString();
+            Duration = TimeSpan.FromDays(1);
+        }
+
+        public abstract CountdownDateTime GetNextDate(DateTime dateTime);
+
+        public CountdownDateTime GetNextDate(CountdownDateTime countdownDateTime)
+        {
+            var countdown = GetNextDate(countdownDateTime.DateTime);
+            return countdown;
+        }
+
+        /// <summary>
+        /// Gets if the given DateTime will occur while this event is in progress.
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public bool IsEventOccurring(DateTime dateTime)
+        {
+            var before = dateTime - Duration;
+            var startCountdownDate = GetNextDate(before);
+            if (startCountdownDate == null)
+                return false;
+            var startDate = startCountdownDate.DateTime;
+            var endDate = startDate + Duration;
+            var result = dateTime >= startDate && dateTime < endDate;
+            return result;
         }
 
         protected CountdownDateTime GetCountdownDateTime(DateTime datetime)
@@ -30,7 +58,24 @@ namespace EventCountdownLogic
             return cdt;
         }
 
-        public abstract IEnumerable<CountdownDateTime> GetFutureDates();
+        public IEnumerable<CountdownDateTime> GetFutureDates()
+        {
+            var dates = GetFutureDates(DateTime.Now);
+            foreach (var date in dates)
+            {
+                yield return date;
+            }
+        }
+
+        public IEnumerable<CountdownDateTime> GetFutureDates(DateTime dateTime)
+        {
+            var countdownDateTime = GetNextDate(dateTime);
+            while (countdownDateTime != null)
+            {
+                yield return countdownDateTime;
+                countdownDateTime = GetNextDate(countdownDateTime);
+            }
+        }
 
         public CountdownDateTime NextDate
         {

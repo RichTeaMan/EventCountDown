@@ -23,38 +23,21 @@ namespace EventCountdownLogic
             Title = title;
             Day = day;
             Month = month;
+            Duration = TimeSpan.FromDays(1);
         }
 
-
-        public override IEnumerable<CountdownDateTime> GetFutureDates()
+        public override CountdownDateTime GetNextDate(DateTime dateTime)
         {
-            var current = GetCountdownDateTime(GetAnnualDateTime(Day, Month));
-            yield return current;
-            while (true)
-            {
-                int nextYear = current.Year + 1;
-                var maxDays = DateTime.DaysInMonth(nextYear, Month);
-                int nextDay;
-                if (Day > maxDays)
-                    nextDay = maxDays;
-                else
-                    nextDay = Day;
-                current = GetCountdownDateTime(nextYear, Month, nextDay);
-                yield return current;
-            }
-        }
+            var year = dateTime.Year;
 
-        public static DateTime GetAnnualDateTime(int day, int month)
-        {
-            var year = DateTime.Now.Year;
-
-            var date = new DateTime(year, month, day);
-            var timeRemaining = date - DateTime.Now;
-            if (timeRemaining.Ticks < 0)
+            var date = new DateTime(year, Month, Day);
+            var timeRemaining = date - dateTime;
+            if (timeRemaining.Ticks <= 0)
             {
-                date = new DateTime(year + 1, month, day);
+                date = new DateTime(year + 1, Month, Day);
             }
-            return date;
+            var countdownDate = new CountdownDateTime(this, date);
+            return countdownDate;
         }
 
     }

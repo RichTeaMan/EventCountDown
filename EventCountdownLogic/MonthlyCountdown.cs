@@ -12,46 +12,25 @@ namespace EventCountdownLogic
     public class MonthlyCountdown : Countdown
     {
         public int Day { get; protected set; }
+
         public MonthlyCountdown(string title, int day)
         {
             if (day > 31 || day < 1)
                 throw new ArgumentException("Invalid day.");
             Title = title;
             Day = day;
+
+            Duration = TimeSpan.FromDays(1);
         }
 
-        public override IEnumerable<CountdownDateTime> GetFutureDates()
+        public override CountdownDateTime GetNextDate(DateTime dateTime)
         {
-            var current = GetCountdownDateTime(GetMonthlyDateTime(Day));
-            yield return current;
-            while (true)
-            {
-                int nextYear = current.Year;
-                int nextMonth = current.Month + 1;
-                if (nextMonth > 12)
-                {
-                    nextMonth = 1;
-                    nextYear++;
-                }
-                var maxDays = DateTime.DaysInMonth(nextYear, nextMonth);
-                int nextDay;
-                if (Day > maxDays)
-                    nextDay = maxDays;
-                else
-                    nextDay = Day;
-                current = GetCountdownDateTime(nextYear, nextMonth, nextDay);
-                yield return current;
-            }
-        }
+            var year = dateTime.Year;
+            var month = dateTime.Month;
 
-        public static DateTime GetMonthlyDateTime(int day)
-        {
-            var year = DateTime.Now.Year;
-            var month = DateTime.Now.Month;
-
-            var date = new DateTime(year, month, day);
-            var timeRemaining = date - DateTime.Now;
-            if (timeRemaining.Ticks < 0)
+            var date = new DateTime(year, month, Day);
+            var timeRemaining = date - dateTime;
+            if (timeRemaining.Ticks <= 0)
             {
                 month++;
                 if (month >= 13)
@@ -59,9 +38,11 @@ namespace EventCountdownLogic
                     year++;
                     month = 1;
                 }
-                date = new DateTime(year, month, day);
+                date = new DateTime(year, month, Day);
             }
-            return date;
+            var countdownDate = new CountdownDateTime(this, date);
+            return countdownDate;
         }
+
     }
 }

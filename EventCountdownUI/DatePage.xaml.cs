@@ -44,7 +44,7 @@ namespace EventCountdownUI
             var events = Countdown.GetCountdowns().Where(cd => cd.IsEventOccuringOnDay(Date)).ToArray();
             int count = events.Length;
 
-            var summary = new TextBlock() { Text = "Event Summary" };
+            var summary = new TextBlock() { Text = "Event Summary", FontSize = 36 };
             var row = new RowDefinition();// { Height = new GridLength(summary.Height + 2) };
             ContentPanel.RowDefinitions.Add(row);
             summary.SetValue(Grid.RowProperty, 0);
@@ -59,7 +59,8 @@ namespace EventCountdownUI
                 int rowCount = 1;
                 foreach (var cd in events)
                 {
-                    var eventBlock = new TextBlock() { Text = cd.Title };
+                    var eventBlock = new TextBlock() { Text = cd.Title, FontSize = 22, Tag = cd };
+                    eventBlock.Tap += EventBlock_Tap;
                     var eventRow = new RowDefinition();// { Height = new GridLength(eventBlock.Height + 2) };
                     ContentPanel.RowDefinitions.Add(eventRow);
                     eventBlock.SetValue(Grid.RowProperty, rowCount);
@@ -72,6 +73,16 @@ namespace EventCountdownUI
                 summary.Text = AppResources.DayNoEventsSummary;
             }
             EventsBuilt = true;
+        }
+
+        private void EventBlock_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var textBlock = sender as TextBlock;
+            if (textBlock == null)
+                return;
+
+            var countdown = textBlock.Tag as Countdown;
+            this.NavigateToCountdownPage(countdown);
         }
     }
 }

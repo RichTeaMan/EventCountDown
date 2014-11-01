@@ -47,11 +47,12 @@ namespace EventCountdownUI
                 var dateBlock = new TextBlock()
                 {
                     Text = date.DateTime.ToShortDateString(),
-                    Height = 22,
-                    Tag = date.DateTime
+                    //Height = 22,
+                    Tag = date.DateTime,
+                    FontSize = 22
                 };
                 dateBlock.Tap += dateBlock_Tap;
-                var row = new RowDefinition() { Height = new GridLength(dateBlock.Height + 2) };
+                var row = new RowDefinition();// { Height = new GridLength(dateBlock.Height + 2) };
                 ContentPanel.RowDefinitions.Add(row);
                 dateBlock.SetValue(Grid.RowProperty, rowCount);
                 ContentPanel.Children.Add(dateBlock);
@@ -68,16 +69,12 @@ namespace EventCountdownUI
                 try
                 {
                     var dateTime = (DateTime)textblock.Tag;
-                    NavigateToCountdownPage(dateTime);
+                    this.NavigateToCountdownPage(dateTime);
                 }
                 catch
                 { }
             }
         }
 
-        private void NavigateToCountdownPage(DateTime dateTime)
-        {
-            NavigationService.Navigate(new Uri("/DatePage.xaml?ticks=" + dateTime.Ticks.ToString(), UriKind.Relative));
-        }
     }
 }

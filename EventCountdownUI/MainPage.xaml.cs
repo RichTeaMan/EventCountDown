@@ -44,12 +44,6 @@ namespace EventCountdownUI
             BuildCountdowns();
         }
 
-        private void NavigateToCountdownPage(Countdown countdown)
-        {
-            NavigationService.Navigate(new Uri("/CountdownPage.xaml?cd=" + countdown.Id, UriKind.Relative));
-        }
-
-
         private void BuildCountdowns()
         {
             // Only build countdowns if this page is new.
@@ -84,7 +78,7 @@ namespace EventCountdownUI
                 return;
 
             e.Handled = true;
-            NavigateToCountdownPage(summary.Countdown);
+            this.NavigateToCountdownPage(summary.Countdown);
         }
 
         // Sample code for building a localized ApplicationBar

@@ -82,6 +82,8 @@ namespace EventCountdownUI
                 return;
 
             var countdown = textBlock.Tag as Countdown;
+            if (countdown == null)
+                return;
             this.NavigateToCountdownPage(countdown);
         }
     }

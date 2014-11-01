@@ -7,7 +7,7 @@
     <Language code="en-GB" />
     <Language code="en-US" />
   </Languages>
-  <App xmlns="" ProductID="{05620dfd-a3e5-4c1c-8c38-de67fb97845a}" Title="EventCountdownUI" RuntimeType="Silverlight" Version="0.0.1.8" Genre="apps.normal" Author="EventCountdownUI author" Description="Sample description" SDOptOut="false" BackUpOptOut="false" Publisher="EventCountdownUI" PublisherID="{e258370a-80d6-43f5-a7c2-48fd8a4a89db}">
+  <App xmlns="" ProductID="{05620dfd-a3e5-4c1c-8c38-de67fb97845a}" Title="Event Countdown" RuntimeType="Silverlight" Version="0.0.1.8" Genre="apps.normal" Author="Thomas Holmes" Description="Countsdown to upcoming events giving you the time wait in weeks, days, hours, minutes and seconds." SDOptOut="false" BackUpOptOut="false" Publisher="TomCo" PublisherID="{e258370a-80d6-43f5-a7c2-48fd8a4a89db}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
@@ -28,8 +28,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicTileSmallInvisible.png</SmallImageURI>
           <Count>0</Count>
           <IconImageURI IsRelative="true" IsResource="false">Assets\Tiles\IconicTileSmallInvisible.png</IconImageURI>
-          <Title>
-          </Title>
+          <Title>Event Countdown</Title>
           <Message>
           </Message>
           <BackgroundColor>

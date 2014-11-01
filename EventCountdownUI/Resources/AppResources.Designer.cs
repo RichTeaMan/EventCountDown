@@ -88,11 +88,29 @@ namespace EventCountdownUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to COUNT events on this day:.
+        /// </summary>
+        public static string DayEventsSummary {
+            get {
+                return ResourceManager.GetString("DayEventsSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to day.
         /// </summary>
         public static string DayName {
             get {
                 return ResourceManager.GetString("DayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no events on this day..
+        /// </summary>
+        public static string DayNoEventsSummary {
+            get {
+                return ResourceManager.GetString("DayNoEventsSummary", resourceCulture);
             }
         }
         

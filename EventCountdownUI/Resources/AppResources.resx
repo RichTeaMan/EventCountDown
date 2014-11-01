@@ -179,4 +179,10 @@
   <data name="YearPluralName" xml:space="preserve">
     <value>years</value>
   </data>
+  <data name="DayEventsSummary" xml:space="preserve">
+    <value>COUNT events on this day:</value>
+  </data>
+  <data name="DayNoEventsSummary" xml:space="preserve">
+    <value>There are no events on this day.</value>
+  </data>
 </root>

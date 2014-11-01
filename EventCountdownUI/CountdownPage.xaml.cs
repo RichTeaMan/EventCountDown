@@ -44,18 +44,40 @@ namespace EventCountdownUI
             int rowCount = 0;
             foreach (var date in Countdown.GetFutureDates().Take(100))
             {
-                var summary = new TextBlock()
+                var dateBlock = new TextBlock()
                 {
                     Text = date.DateTime.ToShortDateString(),
-                    Height = 22
+                    Height = 22,
+                    Tag = date.DateTime
                 };
-                var row = new RowDefinition() { Height = new GridLength(summary.Height + 2) };
+                dateBlock.Tap += dateBlock_Tap;
+                var row = new RowDefinition() { Height = new GridLength(dateBlock.Height + 2) };
                 ContentPanel.RowDefinitions.Add(row);
-                summary.SetValue(Grid.RowProperty, rowCount);
-                ContentPanel.Children.Add(summary);
+                dateBlock.SetValue(Grid.RowProperty, rowCount);
+                ContentPanel.Children.Add(dateBlock);
                 rowCount++;
             }
             DatesBuilt = true;
+        }
+
+        private void dateBlock_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            var textblock = sender as TextBlock;
+            if (textblock != null)
+            {
+                try
+                {
+                    var dateTime = (DateTime)textblock.Tag;
+                    NavigateToCountdownPage(dateTime);
+                }
+                catch
+                { }
+            }
+        }
+
+        private void NavigateToCountdownPage(DateTime dateTime)
+        {
+            NavigationService.Navigate(new Uri("/DatePage.xaml?ticks=" + dateTime.Ticks.ToString(), UriKind.Relative));
         }
     }
 }

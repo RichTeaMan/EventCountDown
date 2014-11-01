@@ -35,12 +35,31 @@ namespace EventCountdownLogic
         /// <returns></returns>
         public bool IsEventOccurring(DateTime dateTime)
         {
-            var before = dateTime - Duration;
-            var startCountdownDate = GetNextDate(before);
+            var startCountdownDate = GetEventCountdownBeforeDate(dateTime);
             if (startCountdownDate == null)
                 return false;
             var startDate = startCountdownDate.DateTime;
             var endDate = startDate + Duration;
+
+            var result = dateTime >= startDate && dateTime < endDate;
+            return result;
+        }
+
+        private CountdownDateTime GetEventCountdownBeforeDate(DateTime dateTime)
+        {
+            var before = dateTime - Duration;
+            var startCountdownDate = GetNextDate(before);
+            return startCountdownDate;
+        }
+
+        public bool IsEventOccuringOnDay(DateTime dateTime)
+        {
+            var startCountdownDate = GetEventCountdownBeforeDate(dateTime);
+            if (startCountdownDate == null)
+                return false;
+            var startDate = startCountdownDate.DateTime.Date;
+            var endDate = (startCountdownDate.DateTime + Duration).Date.AddDays(1);
+
             var result = dateTime >= startDate && dateTime < endDate;
             return result;
         }

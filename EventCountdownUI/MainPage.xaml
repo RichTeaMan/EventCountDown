@@ -10,7 +10,7 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -45,8 +45,9 @@
             <TextBlock x:Name="Version" Height="28" Text="Version" />
         </StackPanel>
 
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"/>
+        <ScrollViewer HorizontalAlignment="Left" Margin="12,0,12,0" Grid.Row="1" VerticalAlignment="Top" >
+            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"/>
+        </ScrollViewer>
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to

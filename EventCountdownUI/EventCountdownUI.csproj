@@ -101,6 +101,9 @@
     <Compile Include="CountdownSummary.xaml.cs">
       <DependentUpon>CountdownSummary.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DatePage.xaml.cs">
+      <DependentUpon>DatePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CountdownSummary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

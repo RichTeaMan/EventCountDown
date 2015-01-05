@@ -82,17 +82,17 @@ namespace EventCountdownUI
 
         public CountdownSummary(Countdown countdown)
         {
-            Countdown = countdown;
-            Interval = TimeInterval.Days;
             ResetSecondsToChange();
+            Countdown = countdown;
             InitializeComponent();
+            SummaryText.TextWrapping = TextWrapping.Wrap;
+            SummaryTimeInterval = TimeInterval.Days;
+            Interval = TimeInterval.Days;
             SetText();
             Timer = new DispatcherTimer();
             Timer.Interval = TimeSpan.FromSeconds(1);
             Timer.Tick += Timer_Tick;
             Timer.Start();
-            SummaryText.TextWrapping = TextWrapping.Wrap;
-            SummaryTimeInterval = TimeInterval.Days;
         }
 
         public void ResetSecondsToChange()

@@ -141,6 +141,15 @@ namespace EventCountdownLogic
             }
         }
 
+        public static Countdown Easter
+        {
+            get
+            {
+                var ev = new AnnualCountdown("Easter", 5, 4);
+                return ev;
+            }
+        }
+
         public static Countdown GeneralElection
         {
             get
@@ -188,6 +197,7 @@ namespace EventCountdownLogic
                     NewYearsEve,
                     PayDay,
                     Valentines,
+                    Easter,
                     DayLightSavingsStart,
                     DayLightSavingsEnd,
                     GeneralElection

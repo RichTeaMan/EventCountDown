@@ -9,7 +9,9 @@
     Foreground="{StaticResource PhoneForegroundBrush}" Height="140" Width="370">
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
-        <TextBlock x:Name="SummaryText" Text="{Binding Path=LocalizedResources.DayCountdown, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="10,10,10,10" TextWrapping="Wrap" VerticalAlignment="Top" Height="100" Width="350" FontSize="36" />
-
+        <StackPanel>
+            <TextBlock x:Name="SummaryText" Text="{Binding Path=LocalizedResources.DayCountdown, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" FontSize="32" />
+            <TextBlock x:Name="DetailText" Text="{Binding Path=LocalizedResources.DayCountdown, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" FontSize="16" Foreground="Gray" />
+        </StackPanel>
     </Grid>
 </UserControl>

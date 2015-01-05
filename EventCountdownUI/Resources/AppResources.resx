@@ -135,7 +135,7 @@
     <value>Menu Item</value>
   </data>
   <data name="GeneralCountdown" xml:space="preserve">
-    <value>COUNT INTERVAL_NAME till EVENT_NAME!</value>
+    <value>EVENT_NAME in COUNT INTERVAL_NAME</value>
   </data>
   <data name="NoCountdown" xml:space="preserve">
     <value>No countdown set.</value>
@@ -184,5 +184,11 @@
   </data>
   <data name="DayNoEventsSummary" xml:space="preserve">
     <value>There are no events on this day.</value>
+  </data>
+  <data name="DetailCountdown" xml:space="preserve">
+    <value>COUNT INTERVAL_NAME left to go!</value>
+  </data>
+  <data name="EventOccuringNow" xml:space="preserve">
+    <value>It's EVENT_NAME!</value>
   </data>
 </root>

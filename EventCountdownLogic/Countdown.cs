@@ -132,6 +132,42 @@ namespace EventCountdownLogic
             }
         }
 
+        public static Countdown Valentines
+        {
+            get
+            {
+                var ev = new AnnualCountdown("Valentines Day", 14, 2);
+                return ev;
+            }
+        }
+
+        public static Countdown GeneralElection
+        {
+            get
+            {
+                var ev = new AnnualCountdown("UK General Election", 5, 5);
+                return ev;
+            }
+        }
+
+        public static Countdown DayLightSavingsStart
+        {
+            get
+            {
+                var ev = new AnnualCountdown("Daylight Savings", 29, 3);
+                return ev;
+            }
+        }
+
+        public static Countdown DayLightSavingsEnd
+        {
+            get
+            {
+                var ev = new AnnualCountdown("Daylight Savings End", 25, 10);
+                return ev;
+            }
+        }
+
         public static Countdown NewYearsEve
         {
             get
@@ -150,7 +186,11 @@ namespace EventCountdownLogic
                     Halloween,
                     Christmas,
                     NewYearsEve,
-                    PayDay
+                    PayDay,
+                    Valentines,
+                    DayLightSavingsStart,
+                    DayLightSavingsEnd,
+                    GeneralElection
                 };
             }
             return _countdowns;

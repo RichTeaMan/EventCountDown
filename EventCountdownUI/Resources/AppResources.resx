@@ -191,4 +191,13 @@
   <data name="EventOccuringNow" xml:space="preserve">
     <value>It's EVENT_NAME!</value>
   </data>
+  <data name="IntervalListCountdown" xml:space="preserve">
+    <value>COUNT INTERVAL_NAME</value>
+  </data>
+  <data name="RemainingTimes" xml:space="preserve">
+    <value>Remaining Time</value>
+  </data>
+  <data name="UpcomingDates" xml:space="preserve">
+    <value>Upcoming Dates</value>
+  </data>
 </root>

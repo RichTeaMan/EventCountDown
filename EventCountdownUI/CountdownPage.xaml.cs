@@ -8,17 +8,35 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using EventCountdownLogic;
+using EventCountdownUI.Resources;
+using System.Windows.Threading;
 
 namespace EventCountdownUI
 {
     public partial class CountdownPage : PhoneApplicationPage
     {
         public bool DatesBuilt { get; private set; }
+        public bool IntervalsBuilt { get; private set; }
         public Countdown Countdown { get; private set; }
+
+        DispatcherTimer Timer;
+
+        List<Tuple<TimeInterval, TextBlock>> intervalTextBlocks;
 
         public CountdownPage()
         {
             InitializeComponent();
+
+            Timer = new DispatcherTimer();
+            Timer.Interval = TimeSpan.FromSeconds(1);
+            Timer.Tick += Timer_Tick;
+
+            intervalTextBlocks = new List<Tuple<TimeInterval, TextBlock>>();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            UpdateIntervals();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -32,8 +50,51 @@ namespace EventCountdownUI
             else
             {
                 Name_tb.Text = Countdown.Title;
+                BuildIntervals();
                 BuildDates();
             }
+
+            Timer.Start();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            Timer.Stop();
+        }
+
+        void UpdateIntervals()
+        {
+            foreach (var intervalBlock in intervalTextBlocks)
+            {
+                var text = Utility.GetCountdownText(intervalBlock.Item1, Countdown, AppResources.IntervalListCountdown);
+                intervalBlock.Item2.Text = text;
+            }
+        }
+
+        void BuildIntervals()
+        {
+            if (IntervalsBuilt)
+                return;
+
+            IntervalPanel.RowDefinitions.Clear();
+            int rowCount = 0;
+            foreach (var interval in Utility.GetIntervals())
+            {
+                var intervalBlock = new TextBlock()
+                {
+                    FontSize = 18
+                };
+                var row = new RowDefinition();// { Height = new GridLength(dateBlock.Height + 2) };
+                IntervalPanel.RowDefinitions.Add(row);
+                intervalBlock.SetValue(Grid.RowProperty, rowCount);
+                IntervalPanel.Children.Add(intervalBlock);
+                rowCount++;
+
+                intervalTextBlocks.Add(new Tuple<TimeInterval, TextBlock>(interval, intervalBlock));
+            }
+            UpdateIntervals();
+            IntervalsBuilt = true;
         }
 
         void BuildDates()
@@ -42,20 +103,19 @@ namespace EventCountdownUI
                 return;
 
             int rowCount = 0;
-            foreach (var date in Countdown.GetFutureDates().Take(100))
+            foreach (var date in Countdown.GetFutureDates().Take(10))
             {
                 var dateBlock = new TextBlock()
                 {
-                    Text = date.DateTime.ToShortDateString(),
-                    //Height = 22,
+                    Text = date.DateTime.ToLongDateString(),
                     Tag = date.DateTime,
-                    FontSize = 22
+                    FontSize = 18
                 };
                 dateBlock.Tap += dateBlock_Tap;
                 var row = new RowDefinition();// { Height = new GridLength(dateBlock.Height + 2) };
-                ContentPanel.RowDefinitions.Add(row);
+                DatePanel.RowDefinitions.Add(row);
                 dateBlock.SetValue(Grid.RowProperty, rowCount);
-                ContentPanel.Children.Add(dateBlock);
+                DatePanel.Children.Add(dateBlock);
                 rowCount++;
             }
             DatesBuilt = true;

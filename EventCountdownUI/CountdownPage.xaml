@@ -27,9 +27,12 @@
         </StackPanel>
         <ScrollViewer HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="1" VerticalAlignment="Top">
             <!--ContentPanel - place additional content here-->
-            <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-
-            </Grid>
+            <StackPanel>
+                <TextBlock Text="{Binding Path=LocalizedResources.RemainingTimes, Source={StaticResource LocalizedStrings}}" Margin="9,12,0,6" Style="{StaticResource PhoneTextTitle2Style}"/>
+                <Grid x:Name="IntervalPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+                <TextBlock Text="{Binding Path=LocalizedResources.UpcomingDates, Source={StaticResource LocalizedStrings}}" Margin="9,12,0,6" Style="{StaticResource PhoneTextTitle2Style}"/>
+                <Grid x:Name="DatePanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+            </StackPanel>
         </ScrollViewer>
     </Grid>
 

@@ -63,7 +63,7 @@ namespace EventCountdownUI
             {
                 if (_detailTimeIntervals == null)
                 {
-                    var intervals = Enum.GetValues(typeof(TimeInterval)).Cast<TimeInterval>().Where(ti => ti != TimeInterval.Days).ToArray();
+                    var intervals = Utility.GetIntervals().Where(ti => ti != TimeInterval.Days).ToArray();
                     _detailTimeIntervals = intervals;
                 }
                 return _detailTimeIntervals;
@@ -122,7 +122,6 @@ namespace EventCountdownUI
             string detailText = string.Empty;
             if (Countdown != null)
             {
-
                 if (Countdown.IsEventOccurring(DateTime.Now))
                 {
                     var sc = new StringCreator()
@@ -152,114 +151,15 @@ namespace EventCountdownUI
 
         private string GetSummaryCountdownText()
         {
-            var summary = GetCountdownText(SummaryTimeInterval, Countdown, AppResources.GeneralCountdown);
+            var summary = Utility.GetCountdownText(SummaryTimeInterval, Countdown, AppResources.GeneralCountdown);
             return summary;
         }
 
         private string GetDetailCountdownText()
         {
-            var summary = GetCountdownText(Interval, Countdown, AppResources.DetailCountdown);
+            var summary = Utility.GetCountdownText(Interval, Countdown, AppResources.DetailCountdown);
             return summary;
         }
-
-        private string GetCountdownText(TimeInterval timeInterval, Countdown countdown, string countdownTemplate)
-        {
-            var intervalNameCount = GetIntervalString(timeInterval, countdown);
-
-            string countStr;
-            var count = intervalNameCount.Count;
-            if (intervalNameCount.Count % 1 == 0)
-                countStr = count.ToString("F0");
-            else
-                countStr = count.ToString("F2");
-
-            var sc = new StringCreator()
-                .AddParameter(StringParam.INTERVAL_NAME, intervalNameCount.TimeIntervalSub)
-                .AddParameter(StringParam.COUNT, countStr)
-                .AddParameter(StringParam.EVENT_NAME, Countdown.Title);
-
-            var summary = sc.BuildString(countdownTemplate);
-            return summary;
-        }
-
-        class IntervalNameCount
-        {
-            public TimeInterval TimeInterval { get; private set; }
-            public string TimeIntervalSub { get; private set; }
-            public double Count { get; private set; }
-
-            public IntervalNameCount(TimeInterval timeInterval, string timeIntervalSub, double count)
-            {
-                TimeInterval = timeInterval;
-                TimeIntervalSub = timeIntervalSub;
-                Count = count;
-            }
-        }
-
-        private IntervalNameCount GetIntervalString(TimeInterval timeInterval, Countdown countdownDateTime)
-        {
-            string intervalSub = null;
-            double count = 0;
-
-            switch (timeInterval)
-            {
-                case TimeInterval.Days:
-                    count = countdownDateTime.NextDate.GetDays;
-                    if (count == 1)
-                        intervalSub = AppResources.DayName;
-                    else
-                        intervalSub = AppResources.DayPluralName;
-                    break;
-                case TimeInterval.Minutes:
-                    count = countdownDateTime.NextDate.GetMinutes;
-                    if (count == 1)
-                        intervalSub = AppResources.MinuteName;
-                    else
-                        intervalSub = AppResources.MinutePluralName;
-                    break;
-                case TimeInterval.Hours:
-                    count = countdownDateTime.NextDate.GetHours;
-                    if (count == 1)
-                        intervalSub = AppResources.HourName;
-                    else
-                        intervalSub = AppResources.HourPluralName;
-                    break;
-                case TimeInterval.Seconds:
-                    count = countdownDateTime.NextDate.GetSeconds;
-                    if (count == 1)
-                        intervalSub = AppResources.SecondName;
-                    else
-                        intervalSub = AppResources.SecondPluralName;
-                    break;
-                case TimeInterval.Weeks:
-                    count = countdownDateTime.NextDate.GetWeeks;
-                    if (count == 1)
-                        intervalSub = AppResources.WeekName;
-                    else
-                        intervalSub = AppResources.WeekPluralName;
-                    break;
-                case TimeInterval.Years:
-                    count = countdownDateTime.NextDate.GetYears;
-                    if (count == 1)
-                        intervalSub = AppResources.YearName;
-                    else
-                        intervalSub = AppResources.YearPluralName;
-                    break;
-            }
-
-            var result = new IntervalNameCount(timeInterval, intervalSub, count);
-            return result;
-        }
-
-        public enum TimeInterval
-        {
-            Seconds,
-            Minutes,
-            Hours,
-            Days,
-            Weeks,
-            Years
-        }
-
+        
     }
 }

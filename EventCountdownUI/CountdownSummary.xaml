@@ -6,12 +6,12 @@
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
-    Foreground="{StaticResource PhoneForegroundBrush}" Height="140" Width="370">
+    Foreground="{StaticResource PhoneForegroundBrush}" Height="120" Width="auto">
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
         <StackPanel>
-            <TextBlock x:Name="SummaryText" Text="{Binding Path=LocalizedResources.DayCountdown, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" FontSize="32" />
-            <TextBlock x:Name="DetailText" Text="{Binding Path=LocalizedResources.DayCountdown, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="350" FontSize="16" Foreground="Gray" />
+            <TextBlock x:Name="SummaryText" Text="{Binding Path=LocalizedResources.DayCountdown, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto" FontSize="34" />
+            <TextBlock x:Name="DetailText" Text="{Binding Path=LocalizedResources.DayCountdown, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="auto" FontSize="18" Foreground="Gray" />
         </StackPanel>
     </Grid>
 </UserControl>

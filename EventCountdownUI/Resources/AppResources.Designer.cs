@@ -169,6 +169,15 @@ namespace EventCountdownUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to COUNT INTERVAL_NAME.
+        /// </summary>
+        public static string IntervalListCountdown {
+            get {
+                return ResourceManager.GetString("IntervalListCountdown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to minutes.
         /// </summary>
         public static string MinuteName {
@@ -205,6 +214,15 @@ namespace EventCountdownUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remaining Time.
+        /// </summary>
+        public static string RemainingTimes {
+            get {
+                return ResourceManager.GetString("RemainingTimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {
@@ -237,6 +255,15 @@ namespace EventCountdownUI.Resources {
         public static string SecondPluralName {
             get {
                 return ResourceManager.GetString("SecondPluralName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upcoming Dates.
+        /// </summary>
+        public static string UpcomingDates {
+            get {
+                return ResourceManager.GetString("UpcomingDates", resourceCulture);
             }
         }
         

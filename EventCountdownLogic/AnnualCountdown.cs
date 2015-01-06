@@ -13,14 +13,13 @@ namespace EventCountdownLogic
         public int Day { get; protected set; }
         public int Month { get; protected set; }
 
-        public AnnualCountdown(string title, int day, int month)
+        public AnnualCountdown(string title, int day, int month) : base(title)
         {
             if (day < 1 || day > 31)
                 throw new ArgumentException("Invalid day.");
             if (month < 1 || month > 12)
                 throw new ArgumentException("Invalid month.");
 
-            Title = title;
             Day = day;
             Month = month;
             Duration = TimeSpan.FromDays(1);

@@ -81,6 +81,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AnnualCountdown.cs" />
+    <Compile Include="ArbitraryCountdown.cs" />
     <Compile Include="Countdown.cs" />
     <Compile Include="CountdownDateTime.cs" />
     <Compile Include="DayAfterAnnualCountdown.cs" />

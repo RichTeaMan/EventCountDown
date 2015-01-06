@@ -13,11 +13,10 @@ namespace EventCountdownLogic
     {
         public int Day { get; protected set; }
 
-        public MonthlyCountdown(string title, int day)
+        public MonthlyCountdown(string title, int day) : base(title)
         {
             if (day > 31 || day < 1)
                 throw new ArgumentException("Invalid day.");
-            Title = title;
             Day = day;
 
             Duration = TimeSpan.FromDays(1);

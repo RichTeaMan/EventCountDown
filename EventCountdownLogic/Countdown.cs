@@ -14,9 +14,10 @@ namespace EventCountdownLogic
 
         public TimeSpan Duration { get; set; }
 
-        protected Countdown()
+        protected Countdown(string title)
         {
             Id = Guid.NewGuid().ToString();
+            Title = title;
             Duration = TimeSpan.FromDays(1);
         }
 
@@ -194,7 +195,7 @@ namespace EventCountdownLogic
         {
             get
             {
-                var ev = new AnnualCountdown("Reading Half Marathon", 22, 3);
+                var ev = new ArbitraryCountdown("Reading Half Marathon", 2015, 3, 22);
                 return ev;
             }
         }
@@ -203,7 +204,17 @@ namespace EventCountdownLogic
         {
             get
             {
-                var ev = new AnnualCountdown("Easter", 5, 4);
+                var ev = new ArbitraryCountdown("Easter", 2015, 4, 5)
+                    .AddDate(2016, 3, 27)
+                    .AddDate(2017, 4, 16)
+                    .AddDate(2018, 4, 1)
+                    .AddDate(2019, 4, 21)
+                    .AddDate(2020, 4, 12)
+                    .AddDate(2021, 4, 4)
+                    .AddDate(2022, 4, 17)
+                    .AddDate(2023, 4, 9)
+                    .AddDate(2024, 3, 31)
+                    .AddDate(2025, 4, 20);
                 return ev;
             }
         }
@@ -212,7 +223,7 @@ namespace EventCountdownLogic
         {
             get
             {
-                var ev = new AnnualCountdown("UK General Election", 5, 5);
+                var ev = new ArbitraryCountdown("UK General Election", 2015, 5, 5);
                 return ev;
             }
         }

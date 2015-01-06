@@ -141,6 +141,15 @@ namespace EventCountdownLogic
             }
         }
 
+        public static Countdown ReadingMarathon
+        {
+            get
+            {
+                var ev = new AnnualCountdown("Reading Half Marathon", 22, 3);
+                return ev;
+            }
+        }
+
         public static Countdown Easter
         {
             get
@@ -197,6 +206,7 @@ namespace EventCountdownLogic
                     NewYearsEve,
                     PayDay,
                     Valentines,
+                    ReadingMarathon,
                     Easter,
                     DayLightSavingsStart,
                     DayLightSavingsEnd,

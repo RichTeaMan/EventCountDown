@@ -43,7 +43,7 @@ namespace EventCountdownUI
         {
             base.OnNavigatedTo(e);
             var key = NavigationContext.QueryString["cd"];
-            Countdown = Countdown.GetCountdowns().FirstOrDefault(cd => cd.Id == key);
+            Countdown = Countdown.GetCountdowns().FirstOrDefault(cd => cd.Title == key);
 
             if (Countdown == null)
                 Name_tb.Text = "Error";

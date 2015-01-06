@@ -8,7 +8,6 @@ namespace EventCountdownLogic
 {
     public abstract class Countdown
     {
-        public string Id { get; private set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -16,7 +15,6 @@ namespace EventCountdownLogic
 
         protected Countdown(string title)
         {
-            Id = Guid.NewGuid().ToString();
             Title = title;
             Duration = TimeSpan.FromDays(1);
         }

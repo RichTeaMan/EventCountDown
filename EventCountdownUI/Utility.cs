@@ -25,7 +25,7 @@ namespace EventCountdownUI
 
         internal static void NavigateToCountdownPage(this PhoneApplicationPage page, Countdown countdown)
         {
-            page.NavigationService.Navigate(new Uri("/CountdownPage.xaml?cd=" + countdown.Id, UriKind.Relative));
+            page.NavigationService.Navigate(new Uri("/CountdownPage.xaml?cd=" + countdown.Title, UriKind.Relative));
         }
 
         internal static void NavigateToCountdownPage(this PhoneApplicationPage page, DateTime dateTime)

@@ -21,9 +21,9 @@ namespace EventCountdownScheduledTaskAgent
             var ev = events[eventI];
 
             var intervals = GetIntervals();
-            int count = int.MaxValue;
+            int count = 0;
             string title = string.Empty;
-            while (count > 99)
+            while (count > 99 || count < 1)
             {
                 var intI = random.Next(intervals.Count());
                 var interval = intervals[intI];
@@ -57,7 +57,7 @@ namespace EventCountdownScheduledTaskAgent
         {
             var intervals = Enum.GetValues(typeof(TimeInterval))
                 .Cast<TimeInterval>()
-                .Where(ti => ti != TimeInterval.Seconds && ti != TimeInterval.Minutes)
+                .Where(ti => ti != TimeInterval.Seconds && ti != TimeInterval.Minutes && ti != TimeInterval.Years)
                 .ToArray();
 
             return intervals;

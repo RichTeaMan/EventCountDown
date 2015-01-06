@@ -1,4 +1,5 @@
-﻿using Microsoft.Phone.Shell;
+﻿using EventCountdownLogic;
+using Microsoft.Phone.Shell;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,26 +14,83 @@ namespace EventCountdownScheduledTaskAgent
     {
         public static void SetTile()
         {
+            var random = new Random();
+
+            var events = EventCountdownLogic.Countdown.GetCountdowns();
+            var eventI = random.Next(events.Count);
+            var ev = events[eventI];
+
+            var intervals = GetIntervals();
+            int count = int.MaxValue;
+            string title = string.Empty;
+            while (count > 99)
+            {
+                var intI = random.Next(intervals.Count());
+                var interval = intervals[intI];
+                var intName = Enum.GetName(typeof(TimeInterval), interval);
+                count = (int)Math.Floor(GetIntervalCount(interval, ev));
+                title = string.Format("{0} to {1}", intName, ev.Title);
+            }
+
             var xmasCountdown = EventCountdownLogic.Countdown.Christmas;
             var tileData = new IconicTileData()
             {
-                Title = "Days to Christmas",
+                Title = title,
                 WideContent1 = "Event Countdown",
                 WideContent2 = string.Empty,
                 WideContent3 = string.Empty,
-                Count = xmasCountdown.NextDate.GetDays,
+                Count = count,
                 IconImage = null,
                 SmallIconImage = null
 
             };
-            
-            var appTile = ShellTile.ActiveTiles.First();
+
+            var appTile = ShellTile.ActiveTiles.FirstOrDefault();
             if (appTile != null)
             {
-                
                 appTile.Update(tileData);
             }
 
         }
+
+        public static TimeInterval[] GetIntervals()
+        {
+            var intervals = Enum.GetValues(typeof(TimeInterval))
+                .Cast<TimeInterval>()
+                .Where(ti => ti != TimeInterval.Seconds && ti != TimeInterval.Minutes)
+                .ToArray();
+
+            return intervals;
+        }
+
+        public static double GetIntervalCount(TimeInterval timeInterval, Countdown countdownDateTime)
+        {
+            double count = 0;
+
+            switch (timeInterval)
+            {
+                case TimeInterval.Days:
+                    count = countdownDateTime.NextDate.GetDays;
+                    break;
+                case TimeInterval.Minutes:
+                    count = countdownDateTime.NextDate.GetMinutes;
+                    break;
+                case TimeInterval.Hours:
+                    count = countdownDateTime.NextDate.GetHours;
+                    break;
+                case TimeInterval.Seconds:
+                    count = countdownDateTime.NextDate.GetSeconds;
+                    break;
+                case TimeInterval.Weeks:
+                    count = countdownDateTime.NextDate.GetWeeks;
+                    break;
+                case TimeInterval.Years:
+                    count = countdownDateTime.NextDate.GetYears;
+                    break;
+            }
+
+            return count;
+        }
+
     }
 }

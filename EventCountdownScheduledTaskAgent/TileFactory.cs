@@ -70,22 +70,22 @@ namespace EventCountdownScheduledTaskAgent
             switch (timeInterval)
             {
                 case TimeInterval.Days:
-                    count = countdownDateTime.NextDate.GetDays;
+                    count = countdownDateTime.NextCountdownDateTime.GetDays;
                     break;
                 case TimeInterval.Minutes:
-                    count = countdownDateTime.NextDate.GetMinutes;
+                    count = countdownDateTime.NextCountdownDateTime.GetMinutes;
                     break;
                 case TimeInterval.Hours:
-                    count = countdownDateTime.NextDate.GetHours;
+                    count = countdownDateTime.NextCountdownDateTime.GetHours;
                     break;
                 case TimeInterval.Seconds:
-                    count = countdownDateTime.NextDate.GetSeconds;
+                    count = countdownDateTime.NextCountdownDateTime.GetSeconds;
                     break;
                 case TimeInterval.Weeks:
-                    count = countdownDateTime.NextDate.GetWeeks;
+                    count = countdownDateTime.NextCountdownDateTime.GetWeeks;
                     break;
                 case TimeInterval.Years:
-                    count = countdownDateTime.NextDate.GetYears;
+                    count = countdownDateTime.NextCountdownDateTime.GetYears;
                     break;
             }
 

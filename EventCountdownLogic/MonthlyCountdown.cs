@@ -23,7 +23,7 @@ namespace EventCountdownLogic
             Duration = TimeSpan.FromDays(1);
         }
 
-        public override CountdownDateTime GetNextDate(DateTime dateTime)
+        public override DateTime? GetNextDate(DateTime dateTime)
         {
             var year = dateTime.Year;
             var month = dateTime.Month;
@@ -40,8 +40,7 @@ namespace EventCountdownLogic
                 }
                 date = new DateTime(year, month, Day);
             }
-            var countdownDate = new CountdownDateTime(this, date);
-            return countdownDate;
+            return date;
         }
 
     }

@@ -52,7 +52,7 @@ namespace EventCountdownUI
 
             var countdowns = Countdown.GetCountdowns()
                 .OrderByDescending(cd => cd.IsEventOccurring(DateTime.Now))
-                .ThenBy(cd => cd.NextDate.GetSeconds);
+                .ThenBy(cd => cd.NextCountdownDateTime.GetSeconds);
 
             int rowCount = 0;
             foreach (var c in countdowns)

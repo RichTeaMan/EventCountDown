@@ -20,12 +20,27 @@ namespace EventCountdownLogic
             Duration = TimeSpan.FromDays(1);
         }
 
-        public abstract CountdownDateTime GetNextDate(DateTime dateTime);
+        /// <summary>
+        /// Gets the next date this event occurs on after the one given, or null
+        /// if there is no date.
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
+        public abstract DateTime? GetNextDate(DateTime dateTime);
 
+        /// <summary>
+        /// Gets the next date this event occurs on after the one given, or null
+        /// if there is no date.
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public CountdownDateTime GetNextDate(CountdownDateTime countdownDateTime)
         {
-            var countdown = GetNextDate(countdownDateTime.DateTime);
-            return countdown;
+            var dateTime = GetNextDate(countdownDateTime.DateTime);
+            if (dateTime == null)
+                return null;
+            else
+                return GetCountdownDateTime(dateTime.Value);
         }
 
         /// <summary>
@@ -45,11 +60,20 @@ namespace EventCountdownLogic
             return result;
         }
 
+        /// <summary>
+        /// Gets the date this event occurs on before the one given, or null
+        /// if there is no date.
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         private CountdownDateTime GetEventCountdownBeforeDate(DateTime dateTime)
         {
             var before = dateTime - Duration;
-            var startCountdownDate = GetNextDate(before);
-            return startCountdownDate;
+            var beforeDateTime = GetNextDate(before);
+            if (beforeDateTime != null)
+                return GetCountdownDateTime(beforeDateTime.Value);
+            else
+                return null;
         }
 
         public bool IsEventOccuringOnDay(DateTime dateTime)
@@ -77,7 +101,7 @@ namespace EventCountdownLogic
             return cdt;
         }
 
-        public IEnumerable<CountdownDateTime> GetFutureDates()
+        public IEnumerable<DateTime> GetFutureDates()
         {
             var dates = GetFutureDates(DateTime.Now);
             foreach (var date in dates)
@@ -86,21 +110,46 @@ namespace EventCountdownLogic
             }
         }
 
-        public IEnumerable<CountdownDateTime> GetFutureDates(DateTime dateTime)
+        public IEnumerable<CountdownDateTime> GetFutureCountdownDateTimes()
+        {
+            var dates = GetFutureCountdownDateTimes(GetCountdownDateTime(DateTime.Now));
+            foreach (var date in dates)
+            {
+                yield return date;
+            }
+        }
+
+        public IEnumerable<DateTime> GetFutureDates(DateTime dateTime)
         {
             var countdownDateTime = GetNextDate(dateTime);
             while (countdownDateTime != null)
             {
-                yield return countdownDateTime;
-                countdownDateTime = GetNextDate(countdownDateTime);
+                yield return countdownDateTime.Value;
+                countdownDateTime = GetNextDate(countdownDateTime.Value);
             }
         }
 
-        public CountdownDateTime NextDate
+        public IEnumerable<CountdownDateTime> GetFutureCountdownDateTimes(CountdownDateTime countdownDateTime)
+        {
+            foreach (var dt in GetFutureDates(countdownDateTime.DateTime))
+            {
+                yield return GetCountdownDateTime(dt);
+            }
+        }
+
+        public CountdownDateTime NextCountdownDateTime
         {
             get
             {
-                return GetFutureDates().First();
+                return GetFutureCountdownDateTimes().FirstOrDefault();
+            }
+        }
+
+        public DateTime? NextDateTime
+        {
+            get
+            {
+                return GetFutureDates().FirstOrDefault();
             }
         }
 
@@ -172,7 +221,7 @@ namespace EventCountdownLogic
         {
             get
             {
-                var ev = new AnnualCountdown("Daylight Savings", 29, 3);
+                var ev = new DayAfterAnnualCountdown("Daylight Savings", 25, 3, DayOfWeek.Sunday);
                 return ev;
             }
         }
@@ -181,7 +230,7 @@ namespace EventCountdownLogic
         {
             get
             {
-                var ev = new AnnualCountdown("Daylight Savings End", 25, 10);
+                var ev = new DayAfterAnnualCountdown("Daylight Savings End", 25, 10, DayOfWeek.Sunday);
                 return ev;
             }
         }

@@ -107,8 +107,8 @@ namespace EventCountdownUI
             {
                 var dateBlock = new TextBlock()
                 {
-                    Text = date.DateTime.ToLongDateString(),
-                    Tag = date.DateTime,
+                    Text = date.ToLongDateString(),
+                    Tag = date,
                     FontSize = 18
                 };
                 dateBlock.Tap += dateBlock_Tap;

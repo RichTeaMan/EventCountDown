@@ -5,15 +5,19 @@ using System.Text;
 
 namespace EventCountdownLogic
 {
-    public class DayAfterAnnualCountdown : AnnualCountdown
+    public class DayAfterArbitraryCountdown : ArbitraryCountdown
     {
         public DayOfWeek[] DaysOfWeek { get; protected set; }
 
         public double DayAdjustment { get; protected set; }
 
-        public DayAfterAnnualCountdown(string title, int day, int month, params DayOfWeek[] daysOfWeek) : base(title, day, month)
+        public DayAfterArbitraryCountdown(string title, IEnumerable<DayOfWeek> daysOfWeek, params DateTime[] dates) : base(title, dates)
         {
-            DaysOfWeek = daysOfWeek;
+            DaysOfWeek = daysOfWeek.ToArray();
+        }
+
+        public DayAfterArbitraryCountdown(string title, DayOfWeek dayOfWeek, params DateTime[] dates) : this(title, new[] { dayOfWeek }, dates)
+        {
             DayAdjustment = 1.0;
         }
 

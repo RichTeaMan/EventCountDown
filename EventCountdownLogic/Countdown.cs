@@ -152,7 +152,7 @@ namespace EventCountdownLogic
             }
         }
 
-        public static Countdown PayDay
+        public static MonthlyCountdown PayDay
         {
             get
             {
@@ -162,7 +162,7 @@ namespace EventCountdownLogic
         }
 
 
-        public static Countdown Halloween
+        public static AnnualCountdown Halloween
         {
             get
             {
@@ -171,7 +171,7 @@ namespace EventCountdownLogic
             }
         }
 
-        public static Countdown Christmas
+        public static AnnualCountdown Christmas
         {
             get
             {
@@ -180,7 +180,7 @@ namespace EventCountdownLogic
             }
         }
 
-        public static Countdown Valentines
+        public static AnnualCountdown Valentines
         {
             get
             {
@@ -189,7 +189,7 @@ namespace EventCountdownLogic
             }
         }
 
-        public static Countdown ReadingMarathon
+        public static ArbitraryCountdown ReadingMarathon
         {
             get
             {
@@ -198,7 +198,7 @@ namespace EventCountdownLogic
             }
         }
 
-        public static Countdown Easter
+        public static ArbitraryCountdown Easter
         {
             get
             {
@@ -217,7 +217,7 @@ namespace EventCountdownLogic
             }
         }
 
-        public static Countdown GeneralElection
+        public static ArbitraryCountdown GeneralElection
         {
             get
             {
@@ -226,7 +226,7 @@ namespace EventCountdownLogic
             }
         }
 
-        public static Countdown DayLightSavingsStart
+        public static DayAfterAnnualCountdown DayLightSavingsStart
         {
             get
             {
@@ -235,7 +235,7 @@ namespace EventCountdownLogic
             }
         }
 
-        public static Countdown DayLightSavingsEnd
+        public static DayAfterAnnualCountdown DayLightSavingsEnd
         {
             get
             {
@@ -244,7 +244,7 @@ namespace EventCountdownLogic
             }
         }
 
-        public static Countdown NewYearsEve
+        public static AnnualCountdown NewYearsEve
         {
             get
             {
@@ -253,12 +253,40 @@ namespace EventCountdownLogic
             }
         }
 
+        public static CountdownList BankHoliday
+        {
+            get
+            {
+                var ev = new CountdownList("Bank Holiday");
+                ev.AddCountdown(new DayAfterAnnualCountdown("New Year Bank Holiday", 1, 1, WorkingDays))
+                    .AddCountdown(new DayBeforeArbitraryCountdown("Good Friday", DayOfWeek.Friday, Easter.DateTimes.ToArray()))
+                    .AddCountdown(new DayAfterArbitraryCountdown("Easter Bank Holiday", DayOfWeek.Monday, Easter.DateTimes.ToArray()))
+                    .AddCountdown(new DayAfterAnnualCountdown("May Day", 1, 5, DayOfWeek.Monday))
+                    .AddCountdown(new DayBeforeAnnualCountdown("Spring Bank Day", 31, 5, DayOfWeek.Monday))
+                    .AddCountdown(new DayBeforeAnnualCountdown("Summer Bank Holiday", 31, 8, DayOfWeek.Monday))
+                    .AddCountdown(new DayAfterAnnualCountdown("Christmas Bank Holiday", 25, 12, WorkingDays))
+                    .AddCountdown(new DayAfterAnnualCountdown("Boxing Day Bank Holiday", 26, 12, WorkingDays)) // probably doesn't work reliably as it needs to know when Christmas falls.
+                    ;
+
+                return ev;
+            }
+        }
+
+        public static ArbitraryCountdown MWC
+        {
+            get
+            {
+                var ev = new ArbitraryCountdown("Mobile World Congress 2015", 2015, 3, 1);
+                return ev;
+            }
+        }
+
         private static IList<Countdown> _countdowns = null;
         public static IList<Countdown> GetCountdowns()
         {
             if (_countdowns == null)
             {
-                _countdowns = new[] {
+                _countdowns = new Countdown[] {
                     Halloween,
                     Christmas,
                     NewYearsEve,
@@ -268,10 +296,20 @@ namespace EventCountdownLogic
                     Easter,
                     DayLightSavingsStart,
                     DayLightSavingsEnd,
-                    GeneralElection
+                    GeneralElection,
+                    BankHoliday,
+                    MWC
                 };
             }
             return _countdowns;
+        }
+
+        public static DayOfWeek[] WorkingDays
+        {
+            get
+            {
+                return new[] { DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday, DayOfWeek.Thursday, DayOfWeek.Friday };
+            }
         }
     }
 }

@@ -103,7 +103,8 @@ namespace EventCountdownUI
                 return;
 
             int rowCount = 0;
-            foreach (var date in Countdown.GetFutureDates().Take(10))
+            var dates = Countdown.GetFutureDates().Take(10).ToArray();
+            foreach (var date in dates)
             {
                 var dateBlock = new TextBlock()
                 {

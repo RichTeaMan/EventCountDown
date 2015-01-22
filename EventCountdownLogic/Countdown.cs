@@ -276,7 +276,7 @@ namespace EventCountdownLogic
         {
             get
             {
-                var ev = new ArbitraryCountdown("Mobile World Congress 2015", 2015, 3, 1);
+                var ev = new ArbitraryCountdown("Mobile World Congress 2015", 2015, 3, 2);
                 return ev;
             }
         }

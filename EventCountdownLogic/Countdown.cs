@@ -221,7 +221,7 @@ namespace EventCountdownLogic
         {
             get
             {
-                var ev = new ArbitraryCountdown("UK General Election", 2015, 5, 5);
+                var ev = new ArbitraryCountdown("UK General Election", 2015, 5, 7);
                 return ev;
             }
         }

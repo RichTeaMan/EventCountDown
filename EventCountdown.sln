@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventCountdownScheduledTaskAgent", "EventCountdownScheduledTaskAgent\EventCountdownScheduledTaskAgent.csproj", "{F003D13A-1EF3-4847-AC9E-D8EA8C2D1B6C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventCountdownLogic", "EventCountdownLogic\EventCountdownLogic.csproj", "{970B50A0-FC44-4704-9E6C-69C468EA4B10}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventCountdownUI", "EventCountdownUI\EventCountdownUI.csproj", "{05620DFD-A3E5-4C1C-8C38-DE67FB97845A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventCountdownLogicTest", "EventCountdownLogicTest\EventCountdownLogicTest.csproj", "{020D1558-CA18-47BE-A713-E1ACE8C2C7BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,14 @@ Global
 		{05620DFD-A3E5-4C1C-8C38-DE67FB97845A}.Release|x86.ActiveCfg = Release|x86
 		{05620DFD-A3E5-4C1C-8C38-DE67FB97845A}.Release|x86.Build.0 = Release|x86
 		{05620DFD-A3E5-4C1C-8C38-DE67FB97845A}.Release|x86.Deploy.0 = Release|x86
+		{020D1558-CA18-47BE-A713-E1ACE8C2C7BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{020D1558-CA18-47BE-A713-E1ACE8C2C7BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{020D1558-CA18-47BE-A713-E1ACE8C2C7BC}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{020D1558-CA18-47BE-A713-E1ACE8C2C7BC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{020D1558-CA18-47BE-A713-E1ACE8C2C7BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{020D1558-CA18-47BE-A713-E1ACE8C2C7BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{020D1558-CA18-47BE-A713-E1ACE8C2C7BC}.Release|ARM.ActiveCfg = Release|Any CPU
+		{020D1558-CA18-47BE-A713-E1ACE8C2C7BC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

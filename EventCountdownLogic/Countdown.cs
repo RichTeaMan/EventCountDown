@@ -10,13 +10,22 @@ namespace EventCountdownLogic
     {
         public string Title { get; set; }
         public string Description { get; set; }
-
+        /// <summary>
+        /// Gets or sets the length of time the event starts.
+        /// </summary>
         public TimeSpan Duration { get; set; }
+        /// <summary>
+        /// Gets or sets the amount of time between events of this type.
+        /// This used in finding events before a given day. If the interval is
+        /// variable use what the maximum could be.
+        /// </summary>
+        public TimeSpan? Interval { get; set; }
 
         protected Countdown(string title)
         {
             Title = title;
             Duration = TimeSpan.FromDays(1);
+            Interval = TimeSpan.FromDays(732);
         }
 
         /// <summary>
@@ -65,23 +74,31 @@ namespace EventCountdownLogic
         /// </summary>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        private CountdownDateTime GetEventCountdownBeforeDate(DateTime dateTime)
+        public virtual CountdownDateTime GetEventCountdownBeforeDate(DateTime dateTime)
         {
-            var before = dateTime - Duration;
+            TimeSpan interval = TimeSpan.FromDays(366);
+            if (Interval.HasValue)
+            {
+                interval = Interval.Value;
+            }
+            var before = (dateTime - Duration) - interval;
+            DateTime? result = null;
             var beforeDateTime = GetNextDate(before);
-            if (beforeDateTime != null)
-                return GetCountdownDateTime(beforeDateTime.Value);
+            while(beforeDateTime != null && beforeDateTime < dateTime)
+            {
+                result = beforeDateTime;
+                beforeDateTime = GetNextDate(beforeDateTime.Value);
+            }
+            if (result != null)
+                return GetCountdownDateTime(result.Value);
             else
                 return null;
         }
 
         public bool IsEventOccuringOnDay(DateTime dateTime)
         {
-            var startCountdownDate = GetEventCountdownBeforeDate(dateTime);
-            if (startCountdownDate == null)
-                return false;
-            var startDate = startCountdownDate.DateTime.Date;
-            var endDate = (startCountdownDate.DateTime + Duration).Date.AddDays(1);
+            var startDate = dateTime.Date;
+            var endDate = dateTime + Duration;
 
             var result = dateTime >= startDate && dateTime < endDate;
             return result;

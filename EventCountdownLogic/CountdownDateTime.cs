@@ -108,5 +108,31 @@ namespace EventCountdownLogic
             return countdownDatetime.DateTime;
         }
 
+        public override bool Equals(object obj)
+        {
+            var cDT = obj as CountdownDateTime;
+            if (cDT != null)
+            {
+                var equal = cDT.Countdown == Countdown && cDT.DateTime == DateTime;
+                return equal;
+            }
+            return base.Equals(obj);
+        }
+
+        public static bool operator == (CountdownDateTime a, CountdownDateTime b)
+        {
+            if (Object.ReferenceEquals(a, b))
+            {
+                return true;
+            }
+            return a.Equals(b);
+        }
+
+        public static bool operator !=(CountdownDateTime a, CountdownDateTime b)
+        {
+            var equal = a == b;
+            return !equal;
+        }
+
     }
 }

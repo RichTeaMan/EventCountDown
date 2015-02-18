@@ -61,5 +61,17 @@ namespace EventCountdownLogic
             return null;
         }
 
+        public override DateTime? GetBeforeDate(DateTime dateTime)
+        {
+            foreach (var dt in DateTimes.AsEnumerable().Reverse())
+            {
+                if (dateTime > dt)
+                {
+                    return dt;
+                }
+            }
+            return null;
+        }
+
     }
 }

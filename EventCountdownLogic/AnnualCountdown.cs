@@ -45,5 +45,25 @@ namespace EventCountdownLogic
             return date;
         }
 
+        public override DateTime? GetBeforeDate(DateTime dateTime)
+        {
+            var year = dateTime.Year;
+
+            DateTime? date = new DateTime(year, Month, Day);
+            var timeRemaining = date - dateTime;
+            if (timeRemaining.Value.Ticks >= 0)
+            {
+                if (year > 1)
+                {
+                    date = new DateTime(year - 1, Month, Day);
+                }
+                else
+                {
+                    date = null;
+                }
+            }
+            return date;
+        }
+
     }
 }

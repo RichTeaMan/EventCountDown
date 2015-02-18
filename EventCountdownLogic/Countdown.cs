@@ -97,8 +97,8 @@ namespace EventCountdownLogic
 
         public bool IsEventOccuringOnDay(DateTime dateTime)
         {
-            var startDate = dateTime.Date;
-            var endDate = dateTime + Duration;
+            var startDate = GetNextDate(dateTime.Date - Duration);
+            var endDate = startDate + Duration;
 
             var result = dateTime >= startDate && dateTime < endDate;
             return result;

@@ -19,7 +19,12 @@ namespace EventCountdownLogic
 
         public override DateTime? GetNextDate(DateTime dateTime)
         {
-            var dateN = base.GetNextDate(dateTime);
+            var startDate = dateTime;
+            while (!DaysOfWeek.Contains(startDate.DayOfWeek))
+            {
+                startDate = startDate.AddDays(-1);
+            }
+            var dateN = base.GetNextDate(startDate);
             if (dateN.HasValue)
             {
                 var date = dateN.Value;

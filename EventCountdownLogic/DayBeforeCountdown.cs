@@ -5,21 +5,23 @@ using System.Text;
 
 namespace EventCountdownLogic
 {
-    public class DayBeforeArbitraryCountdown : DayAfterArbitraryCountdown
+    public class DayBeforeCountdown : Countdown
     {
-        public DayBeforeArbitraryCountdown(string title, IEnumerable<DayOfWeek> daysOfWeek, params DateTime[] dates) : base(title, daysOfWeek, dates)
+        public DayOfWeek[] DaysOfWeek { get; protected set; }
+        public double DayAdjustment { get; set; }
+
+        protected Countdown FixedCountdown { get; set; }
+
+        public DayBeforeCountdown(string title, Countdown countdown, params DayOfWeek[] daysOfWeek) : base(title)
         {
             DayAdjustment = -1.0;
-        }
-
-        public DayBeforeArbitraryCountdown(string title, DayOfWeek dayOfWeek, params DateTime[] dates) : this(title, new[] { dayOfWeek }, dates)
-        {
-            
+            DaysOfWeek = daysOfWeek;
+            FixedCountdown = countdown;
         }
 
         public override DateTime? GetNextDate(DateTime dateTime)
         {
-            var dateN = base.GetNextDate(dateTime);
+            var dateN = FixedCountdown.GetNextDate(dateTime);
             if (dateN.HasValue)
             {
                 var date = dateN;
@@ -30,7 +32,7 @@ namespace EventCountdownLogic
                     totalAdjustment += DayAdjustment;
                     if (date <= dateTime)
                     {
-                        date = GetNextDate(dateTime.AddDays(7.0 - totalAdjustment));
+                        date = GetNextDate(dateTime.AddDays(7.0 + totalAdjustment));
                         break;
                     }
                 }
@@ -41,6 +43,5 @@ namespace EventCountdownLogic
                 return null;
             }
         }
-
     }
 }

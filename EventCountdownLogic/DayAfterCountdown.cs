@@ -5,20 +5,19 @@ using System.Text;
 
 namespace EventCountdownLogic
 {
-    public class DayAfterArbitraryCountdown : ArbitraryCountdown
+    public class DayAfterCountdown : Countdown
     {
         public DayOfWeek[] DaysOfWeek { get; protected set; }
 
         public double DayAdjustment { get; protected set; }
 
-        public DayAfterArbitraryCountdown(string title, IEnumerable<DayOfWeek> daysOfWeek, params DateTime[] dates) : base(title, dates)
-        {
-            DaysOfWeek = daysOfWeek.ToArray();
-        }
+        protected Countdown FixedCountdown { get; set; }
 
-        public DayAfterArbitraryCountdown(string title, DayOfWeek dayOfWeek, params DateTime[] dates) : this(title, new[] { dayOfWeek }, dates)
+        public DayAfterCountdown(string title, Countdown countdown, params DayOfWeek[] daysOfWeek) : base(title)
         {
+            DaysOfWeek = daysOfWeek;
             DayAdjustment = 1.0;
+            FixedCountdown = countdown;
         }
 
         public override DateTime? GetNextDate(DateTime dateTime)
@@ -28,7 +27,7 @@ namespace EventCountdownLogic
             {
                 startDate = startDate.AddDays(-1);
             }
-            var dateN = base.GetNextDate(startDate);
+            var dateN = FixedCountdown.GetNextDate(startDate);
             if (dateN.HasValue)
             {
                 var date = dateN.Value;

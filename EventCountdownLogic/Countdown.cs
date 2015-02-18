@@ -68,7 +68,7 @@ namespace EventCountdownLogic
             return result;
         }
 
-        public virtual CountdownDateTime GetBeforeDate(CountdownDateTime dateTime)
+        public CountdownDateTime GetBeforeDate(CountdownDateTime dateTime)
         {
             var date = GetBeforeDate(dateTime.DateTime);
             if (date == null)

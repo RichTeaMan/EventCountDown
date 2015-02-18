@@ -29,11 +29,18 @@ namespace EventCountdownLogic
         {
             var year = dateTime.Year;
 
-            var date = new DateTime(year, Month, Day);
+            DateTime? date = new DateTime(year, Month, Day);
             var timeRemaining = date - dateTime;
-            if (timeRemaining.Ticks <= 0)
+            if (timeRemaining.Value.Ticks <= 0)
             {
-                date = new DateTime(year + 1, Month, Day);
+                if (year < 9999)
+                {
+                    date = new DateTime(year + 1, Month, Day);
+                }
+                else
+                {
+                    date = null;
+                }
             }
             return date;
         }

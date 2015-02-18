@@ -16,7 +16,7 @@ namespace EventCountdownLogic
 
         public ArbitraryCountdown(string title, params DateTime[] dates) : this(title)
         {
-            DateTimes.AddRange(dates);
+            AddDates(dates);
         }
 
         public ArbitraryCountdown(string title, int year, int month, int day) : this(title)
@@ -27,6 +27,7 @@ namespace EventCountdownLogic
         public ArbitraryCountdown AddDate(DateTime dateTime)
         {
             DateTimes.Add(dateTime);
+            SortDates();
             return this;
         }
 
@@ -34,6 +35,18 @@ namespace EventCountdownLogic
         {
             var date = new DateTime(year, month, day);
             return AddDate(date);
+        }
+
+        public ArbitraryCountdown AddDates(params DateTime[] dateTimes)
+        {
+            DateTimes.AddRange(dateTimes);
+            SortDates();
+            return this;
+        }
+
+        protected void SortDates()
+        {
+            DateTimes = DateTimes.OrderBy(dt => dt).ToList();
         }
 
         public override DateTime? GetNextDate(DateTime dateTime)

@@ -108,6 +108,12 @@ namespace EventCountdownLogic
             return countdownDatetime.DateTime;
         }
 
+        public override int GetHashCode()
+        {
+            var hash = Countdown.GetHashCode() ^ DateTime.GetHashCode();
+            return hash;
+        }
+
         public override bool Equals(object obj)
         {
             var cDT = obj as CountdownDateTime;

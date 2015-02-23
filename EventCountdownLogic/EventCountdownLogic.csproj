@@ -85,10 +85,10 @@
     <Compile Include="Countdown.cs" />
     <Compile Include="CountdownDateTime.cs" />
     <Compile Include="CountdownList.cs" />
-    <Compile Include="DayBeforeArbitraryCountdown.cs" />
+    <Compile Include="DayAfterCountdown.cs" />
+    <Compile Include="DayBeforeCountdown.cs" />
     <Compile Include="DayBeforeAnnualCountdown.cs" />
     <Compile Include="DayAfterAnnualCountdown.cs" />
-    <Compile Include="DayAfterArbitraryCountdown.cs" />
     <Compile Include="MonthlyCountdown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

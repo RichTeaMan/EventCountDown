@@ -67,14 +67,23 @@ namespace EventCountdownLogic
         /// <returns></returns>
         public bool IsEventOccurring(DateTime dateTime)
         {
-            var startCountdownDate = GetEventCountdownBeforeDate(dateTime);
+            var startCountdownDate = GetBeforeDate(dateTime);
             if (startCountdownDate == null)
                 return false;
-            var startDate = startCountdownDate.DateTime;
+            var startDate = startCountdownDate.Value;
             var endDate = startDate + Duration;
 
             var result = dateTime >= startDate && dateTime < endDate;
             return result;
+        }
+
+        public CountdownDateTime GetBeforeDate(CountdownDateTime dateTime)
+        {
+            var date = GetBeforeDate(dateTime.DateTime);
+            if (date == null)
+                return null;
+            else
+                return new CountdownDateTime(this, date.Value);
         }
 
         /// <summary>
@@ -83,7 +92,7 @@ namespace EventCountdownLogic
         /// </summary>
         /// <param name="dateTime"></param>
         /// <returns></returns>
-        public virtual CountdownDateTime GetEventCountdownBeforeDate(DateTime dateTime)
+        public virtual DateTime? GetBeforeDate(DateTime dateTime)
         {
             TimeSpan interval = TimeSpan.FromDays(366);
             if (Interval.HasValue)
@@ -98,10 +107,7 @@ namespace EventCountdownLogic
                 result = beforeDateTime;
                 beforeDateTime = GetNextDate(beforeDateTime.Value);
             }
-            if (result != null)
-                return GetCountdownDateTime(result.Value);
-            else
-                return null;
+            return result;
         }
 
         public bool IsEventOccuringOnDay(DateTime dateTime)
@@ -325,8 +331,8 @@ namespace EventCountdownLogic
             {
                 var ev = new CountdownList("Bank Holiday");
                 ev.AddCountdown(new DayAfterAnnualCountdown("New Year Bank Holiday", 1, 1, WorkingDays))
-                    .AddCountdown(new DayBeforeArbitraryCountdown("Good Friday", DayOfWeek.Friday, Easter.DateTimes.ToArray()))
-                    .AddCountdown(new DayAfterArbitraryCountdown("Easter Bank Holiday", DayOfWeek.Monday, Easter.DateTimes.ToArray()))
+                    .AddCountdown(new DayBeforeCountdown("Good Friday", Easter, DayOfWeek.Friday))
+                    .AddCountdown(new DayAfterCountdown("Easter Bank Holiday", Easter, DayOfWeek.Monday))
                     .AddCountdown(new DayAfterAnnualCountdown("May Day", 1, 5, DayOfWeek.Monday))
                     .AddCountdown(new DayBeforeAnnualCountdown("Spring Bank Day", 31, 5, DayOfWeek.Monday))
                     .AddCountdown(new DayBeforeAnnualCountdown("Summer Bank Holiday", 31, 8, DayOfWeek.Monday))

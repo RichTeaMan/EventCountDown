@@ -18,10 +18,10 @@ namespace EventCountdownLogicTest
             {
                 var dates = cd.GetFutureCountdownDateTimes(new CountdownDateTime(cd, startDate)).Take(100);
                 var firstDate = cd.GetFutureCountdownDateTimes(new CountdownDateTime(cd, startDate)).First();
-                CountdownDateTime previous = cd.GetEventCountdownBeforeDate(firstDate.DateTime);
+                CountdownDateTime previous = cd.GetBeforeDate(firstDate);
                 foreach (var d in dates)
                 {
-                    var before = cd.GetEventCountdownBeforeDate(d.DateTime);
+                    CountdownDateTime before = cd.GetBeforeDate(d);
                     Assert.AreEqual(previous, before,
                         "{0} failed get event before {1}. Returned '{2}', expected '{3}'.",
                         cd.Title,

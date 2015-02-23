@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,11 +24,17 @@ namespace EventCountdownLogic
         /// </summary>
         public TimeSpan? Interval { get; set; }
 
-        protected Countdown(string title)
+        public virtual string CountdownType { get { throw new NotImplementedException(); } }
+
+        public Countdown() : base()
         {
-            Title = title;
             Duration = TimeSpan.FromDays(1);
             Interval = TimeSpan.FromDays(732);
+        }
+
+        protected Countdown(string title) : this()
+        {
+            Title = title;
         }
 
         /// <summary>
@@ -153,6 +162,45 @@ namespace EventCountdownLogic
             }
         }
 
+        public virtual bool IsEquivalent(Countdown c)
+        {
+            if (object.ReferenceEquals(this, c))
+            {
+                return true;
+            }
+            else
+            {
+                var equal = Title == c.Title &&
+                    c.Description == Description;
+                return equal;
+            }
+        }
+
+        public string Serliaze()
+        {
+            var serial = JsonConvert.SerializeObject(this, Newtonsoft.Json.Formatting.Indented);
+            return serial;
+        }
+
+        public static Countdown Deserialize(string serial)
+        {
+            dynamic json = JObject.Parse(serial);
+            var countdownTypeStr = json["CountdownType"].Value;
+
+            Countdown result = null;
+
+            if (countdownTypeStr == ArbitraryCountdown.CountdownTypeName)
+            {
+                result = JsonConvert.DeserializeObject<ArbitraryCountdown>(serial);
+            }
+            else if (countdownTypeStr == AnnualCountdown.CountdownTypeName)
+            {
+                result = JsonConvert.DeserializeObject<AnnualCountdown>(serial);
+            }
+            return result;
+        }
+
+        [JsonIgnore]
         public CountdownDateTime NextCountdownDateTime
         {
             get
@@ -161,6 +209,7 @@ namespace EventCountdownLogic
             }
         }
 
+        [JsonIgnore]
         public DateTime? NextDateTime
         {
             get
@@ -298,6 +347,15 @@ namespace EventCountdownLogic
             }
         }
 
+        public static ArbitraryCountdown HospitalTrip
+        {
+            get
+            {
+                var ev = new ArbitraryCountdown("Gobble's Hospital Trip", 2015, 3, 24);
+                return ev;
+            }
+        }
+
         private static IList<Countdown> _countdowns = null;
         public static IList<Countdown> GetCountdowns()
         {
@@ -315,7 +373,8 @@ namespace EventCountdownLogic
                     DayLightSavingsEnd,
                     GeneralElection,
                     BankHoliday,
-                    MWC
+                    MWC,
+                    HospitalTrip,
                 };
             }
             return _countdowns;

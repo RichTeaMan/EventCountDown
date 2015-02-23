@@ -10,8 +10,18 @@ namespace EventCountdownLogic
     /// </summary>
     public class AnnualCountdown : Countdown
     {
-        public int Day { get; protected set; }
-        public int Month { get; protected set; }
+        public int Day { get; set; }
+        public int Month { get; set; }
+
+        public const string CountdownTypeName = "Annual";
+
+        public override string CountdownType
+        {
+            get
+            {
+                return CountdownTypeName;
+            }
+        }
 
         public AnnualCountdown(string title, int day, int month) : base(title)
         {
@@ -25,6 +35,8 @@ namespace EventCountdownLogic
             Duration = TimeSpan.FromDays(1);
         }
 
+        public AnnualCountdown() : base() { }
+
         public override DateTime? GetNextDate(DateTime dateTime)
         {
             var year = dateTime.Year;
@@ -36,6 +48,20 @@ namespace EventCountdownLogic
                 date = new DateTime(year + 1, Month, Day);
             }
             return date;
+        }
+
+        public override bool IsEquivalent(Countdown c)
+        {
+            if (base.IsEquivalent(c))
+            {
+                var aC = c as AnnualCountdown;
+                if (aC != null)
+                {
+                    var equal = Day == aC.Day && Month == aC.Month;
+                    return equal;
+                }
+            }
+            return false;
         }
 
     }

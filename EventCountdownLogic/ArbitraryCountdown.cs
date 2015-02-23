@@ -9,6 +9,18 @@ namespace EventCountdownLogic
     {
         public List<DateTime> DateTimes { get; protected set; }
 
+        public const string CountdownTypeName = "Arbitrary";
+
+        public override string CountdownType
+        {
+            get
+            {
+                return CountdownTypeName;
+            }
+        }
+
+        public ArbitraryCountdown() : base() { }
+
         protected ArbitraryCountdown(string title) : base(title)
         {
             DateTimes = new List<DateTime>();
@@ -48,5 +60,17 @@ namespace EventCountdownLogic
             return null;
         }
 
+        public override bool IsEquivalent(Countdown c)
+        {
+            if (base.IsEquivalent(c))
+            {
+                var aC = c as ArbitraryCountdown;
+                if (aC != null)
+                {
+                    return DateTimes.SequenceEqual(aC.DateTimes);
+                }
+            }
+            return false;
+        }
     }
 }

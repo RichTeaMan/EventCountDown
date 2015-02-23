@@ -61,5 +61,30 @@ namespace EventCountdownLogicTest
                 }
             }
         }
+
+        [TestMethod]
+        public void IsEquivalent()
+        {
+            var xmas1 = Countdown.Christmas;
+            var xmas2 = Countdown.Christmas;
+
+            Assert.IsTrue(xmas1.IsEquivalent(xmas2), "Events should be equivalent.");
+
+            var xmas3 = Countdown.Christmas;
+            xmas3.Description = xmas3.Description + xmas3.Description;
+            Assert.IsFalse(xmas1.IsEquivalent(xmas3), "Events should not be equivalent.");
+        }
+
+        [TestMethod]
+        public void AnnualCountdownDeserial()
+        {
+            var xmas = Countdown.Christmas;
+
+            var serial = xmas.Serliaze();
+
+            var deserial = Countdown.Deserialize(serial);
+
+            Assert.IsTrue(xmas.IsEquivalent(deserial));
+        }
     }
 }

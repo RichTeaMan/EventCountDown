@@ -24,7 +24,7 @@
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>en-GB</DefaultLanguage>
     <NuGetPackageImportStamp>72b8eb93</NuGetPackageImportStamp>
     <ApplicationInsightsResourceId>/subscriptions/19f90b4c-49b5-4a4c-93ba-963d0e5a3b68/resourcegroups/Default-ApplicationInsights-CentralUS/providers/microsoft.insights/components/EventCountdownUI</ApplicationInsightsResourceId>
   </PropertyGroup>

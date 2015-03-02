@@ -79,19 +79,35 @@ namespace EventCountdownUI
 
             IntervalPanel.RowDefinitions.Clear();
             int rowCount = 0;
-            foreach (var interval in Utility.GetIntervals())
+            if (Countdown.NextCountdownDateTime == null)
             {
                 var intervalBlock = new TextBlock()
-                {
-                    FontSize = 18
-                };
+                    {
+                        Text = AppResources.NoDates,
+                        FontSize = 18
+                    };
                 var row = new RowDefinition();// { Height = new GridLength(dateBlock.Height + 2) };
                 IntervalPanel.RowDefinitions.Add(row);
                 intervalBlock.SetValue(Grid.RowProperty, rowCount);
                 IntervalPanel.Children.Add(intervalBlock);
                 rowCount++;
+            }
+            else
+            {
+                foreach (var interval in Utility.GetIntervals())
+                {
+                    var intervalBlock = new TextBlock()
+                    {
+                        FontSize = 18
+                    };
+                    var row = new RowDefinition();// { Height = new GridLength(dateBlock.Height + 2) };
+                    IntervalPanel.RowDefinitions.Add(row);
+                    intervalBlock.SetValue(Grid.RowProperty, rowCount);
+                    IntervalPanel.Children.Add(intervalBlock);
+                    rowCount++;
 
-                intervalTextBlocks.Add(new Tuple<TimeInterval, TextBlock>(interval, intervalBlock));
+                    intervalTextBlocks.Add(new Tuple<TimeInterval, TextBlock>(interval, intervalBlock));
+                }
             }
             UpdateIntervals();
             IntervalsBuilt = true;
@@ -104,20 +120,35 @@ namespace EventCountdownUI
 
             int rowCount = 0;
             var dates = Countdown.GetFutureDates().Take(10).ToArray();
-            foreach (var date in dates)
+            if (dates.Count() == 0)
             {
                 var dateBlock = new TextBlock()
                 {
-                    Text = date.ToLongDateString(),
-                    Tag = date,
+                    Text = AppResources.NoDates,
                     FontSize = 18
                 };
-                dateBlock.Tap += dateBlock_Tap;
                 var row = new RowDefinition();// { Height = new GridLength(dateBlock.Height + 2) };
                 DatePanel.RowDefinitions.Add(row);
                 dateBlock.SetValue(Grid.RowProperty, rowCount);
                 DatePanel.Children.Add(dateBlock);
-                rowCount++;
+            }
+            else
+            {
+                foreach (var date in dates)
+                {
+                    var dateBlock = new TextBlock()
+                    {
+                        Text = date.ToLongDateString(),
+                        Tag = date,
+                        FontSize = 18
+                    };
+                    dateBlock.Tap += dateBlock_Tap;
+                    var row = new RowDefinition();// { Height = new GridLength(dateBlock.Height + 2) };
+                    DatePanel.RowDefinitions.Add(row);
+                    dateBlock.SetValue(Grid.RowProperty, rowCount);
+                    DatePanel.Children.Add(dateBlock);
+                    rowCount++;
+                }
             }
             DatesBuilt = true;
         }

@@ -200,4 +200,7 @@
   <data name="UpcomingDates" xml:space="preserve">
     <value>Upcoming Dates</value>
   </data>
+  <data name="NoDates" xml:space="preserve">
+    <value>There are no upcoming dates.</value>
+  </data>
 </root>

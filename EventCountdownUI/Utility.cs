@@ -47,42 +47,48 @@ namespace EventCountdownUI
             switch (timeInterval)
             {
                 case TimeInterval.Days:
-                    count = countdownDateTime.NextCountdownDateTime.GetDays;
+                    if (countdownDateTime.NextCountdownDateTime != null)
+                        count = countdownDateTime.NextCountdownDateTime.GetDays;
                     if (count == 1)
                         intervalSub = AppResources.DayName;
                     else
                         intervalSub = AppResources.DayPluralName;
                     break;
                 case TimeInterval.Minutes:
-                    count = countdownDateTime.NextCountdownDateTime.GetMinutes;
+                    if (countdownDateTime.NextCountdownDateTime != null)
+                        count = countdownDateTime.NextCountdownDateTime.GetMinutes;
                     if (count == 1)
                         intervalSub = AppResources.MinuteName;
                     else
                         intervalSub = AppResources.MinutePluralName;
                     break;
                 case TimeInterval.Hours:
-                    count = countdownDateTime.NextCountdownDateTime.GetHours;
+                    if (countdownDateTime.NextCountdownDateTime != null)
+                        count = countdownDateTime.NextCountdownDateTime.GetHours;
                     if (count == 1)
                         intervalSub = AppResources.HourName;
                     else
                         intervalSub = AppResources.HourPluralName;
                     break;
                 case TimeInterval.Seconds:
-                    count = countdownDateTime.NextCountdownDateTime.GetSeconds;
+                    if (countdownDateTime.NextCountdownDateTime != null)
+                        count = countdownDateTime.NextCountdownDateTime.GetSeconds;
                     if (count == 1)
                         intervalSub = AppResources.SecondName;
                     else
                         intervalSub = AppResources.SecondPluralName;
                     break;
                 case TimeInterval.Weeks:
-                    count = countdownDateTime.NextCountdownDateTime.GetWeeks;
+                    if (countdownDateTime.NextCountdownDateTime != null)
+                        count = countdownDateTime.NextCountdownDateTime.GetWeeks;
                     if (count == 1)
                         intervalSub = AppResources.WeekName;
                     else
                         intervalSub = AppResources.WeekPluralName;
                     break;
                 case TimeInterval.Years:
-                    count = countdownDateTime.NextCountdownDateTime.GetYears;
+                    if (countdownDateTime.NextCountdownDateTime != null)
+                        count = countdownDateTime.NextCountdownDateTime.GetYears;
                     if (count == 1)
                         intervalSub = AppResources.YearName;
                     else

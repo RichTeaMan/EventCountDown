@@ -362,6 +362,15 @@ namespace EventCountdownLogic
             }
         }
 
+        public static ArbitraryCountdown LastDay
+        {
+            get
+            {
+                var ev = new ArbitraryCountdown("Last Day at 51Degrees", 2015, 7, 10);
+                return ev;
+            }
+        }
+
         private static IList<Countdown> _countdowns = null;
         public static IList<Countdown> GetCountdowns()
         {
@@ -381,6 +390,7 @@ namespace EventCountdownLogic
                     BankHoliday,
                     MWC,
                     HospitalTrip,
+                    LastDay,
                 };
             }
             return _countdowns;

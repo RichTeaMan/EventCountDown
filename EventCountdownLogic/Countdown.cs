@@ -371,6 +371,33 @@ namespace EventCountdownLogic
             }
         }
 
+        public static ArbitraryCountdown BaeJob
+        {
+            get
+            {
+                var ev = new ArbitraryCountdown("BAE Job Starts", 2015, 9, 21);
+                return ev;
+            }
+        }
+
+        public static ArbitraryCountdown NewTapper
+        {
+            get
+            {
+                var ev = new ArbitraryCountdown("Tapper Tapper!", 2015, 7, 21);
+                return ev;
+            }
+        }
+
+        public static ArbitraryCountdown NewGobbleJob
+        {
+            get
+            {
+                var ev = new ArbitraryCountdown("New Gobble Job", 2015, 10, 1);
+                return ev;
+            }
+        }
+
         private static IList<Countdown> _countdowns = null;
         public static IList<Countdown> GetCountdowns()
         {
@@ -391,6 +418,9 @@ namespace EventCountdownLogic
                     MWC,
                     HospitalTrip,
                     LastDay,
+                    BaeJob,
+                    NewTapper,
+                    NewGobbleJob,
                 };
             }
             return _countdowns;

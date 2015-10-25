@@ -228,11 +228,19 @@ namespace EventCountdownLogic
         {
             get
             {
-                var payday = new MonthlyCountdown("Payday", 28);
+                var payday = new MonthlyCountdown("Payday", 22);
                 return payday;
             }
         }
 
+        public static AnnualCountdown GuyFawkesNight
+        {
+            get
+            {
+                var guyFawkesNight = new AnnualCountdown("Guy Fawkes Night", 6, 11);
+                return guyFawkesNight;
+            }
+        }
 
         public static AnnualCountdown Halloween
         {
@@ -261,15 +269,6 @@ namespace EventCountdownLogic
             }
         }
 
-        public static ArbitraryCountdown ReadingMarathon
-        {
-            get
-            {
-                var ev = new ArbitraryCountdown("Reading Half Marathon", 2015, 3, 22);
-                return ev;
-            }
-        }
-
         public static ArbitraryCountdown Easter
         {
             get
@@ -285,15 +284,6 @@ namespace EventCountdownLogic
                     .AddDate(2023, 4, 9)
                     .AddDate(2024, 3, 31)
                     .AddDate(2025, 4, 20);
-                return ev;
-            }
-        }
-
-        public static ArbitraryCountdown GeneralElection
-        {
-            get
-            {
-                var ev = new ArbitraryCountdown("UK General Election", 2015, 5, 7);
                 return ev;
             }
         }
@@ -344,83 +334,22 @@ namespace EventCountdownLogic
             }
         }
 
-        public static ArbitraryCountdown MWC
-        {
-            get
-            {
-                var ev = new ArbitraryCountdown("Mobile World Congress 2015", 2015, 3, 2);
-                return ev;
-            }
-        }
-
-        public static ArbitraryCountdown HospitalTrip
-        {
-            get
-            {
-                var ev = new ArbitraryCountdown("Gobble's Hospital Trip", 2015, 3, 24);
-                return ev;
-            }
-        }
-
-        public static ArbitraryCountdown LastDay
-        {
-            get
-            {
-                var ev = new ArbitraryCountdown("Last Day at 51Degrees", 2015, 7, 10);
-                return ev;
-            }
-        }
-
-        public static ArbitraryCountdown BaeJob
-        {
-            get
-            {
-                var ev = new ArbitraryCountdown("BAE Job Starts", 2015, 9, 21);
-                return ev;
-            }
-        }
-
-        public static ArbitraryCountdown NewTapper
-        {
-            get
-            {
-                var ev = new ArbitraryCountdown("Tapper Tapper!", 2015, 7, 21);
-                return ev;
-            }
-        }
-
-        public static ArbitraryCountdown NewGobbleJob
-        {
-            get
-            {
-                var ev = new ArbitraryCountdown("New Gobble Job", 2015, 10, 1);
-                return ev;
-            }
-        }
-
         private static IList<Countdown> _countdowns = null;
         public static IList<Countdown> GetCountdowns()
         {
             if (_countdowns == null)
             {
                 _countdowns = new Countdown[] {
+                    GuyFawkesNight,
                     Halloween,
                     Christmas,
                     NewYearsEve,
                     PayDay,
                     Valentines,
-                    ReadingMarathon,
                     Easter,
                     DayLightSavingsStart,
                     DayLightSavingsEnd,
-                    GeneralElection,
                     BankHoliday,
-                    MWC,
-                    HospitalTrip,
-                    LastDay,
-                    BaeJob,
-                    NewTapper,
-                    NewGobbleJob,
                 };
             }
             return _countdowns;
